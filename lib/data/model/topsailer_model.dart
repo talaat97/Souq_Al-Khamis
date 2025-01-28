@@ -17,6 +17,7 @@ class TopSailerModel {
   String? categoriesImage;
   String? categoriesDatetime;
   String? topSailer;
+  String? iteamPriceDescount;
 
   TopSailerModel(
       {this.iteamsId,
@@ -36,7 +37,8 @@ class TopSailerModel {
       this.categoriesNameAr,
       this.categoriesImage,
       this.categoriesDatetime,
-      this.topSailer});
+      this.topSailer,
+      this.iteamPriceDescount});
 
   TopSailerModel.fromJson(Map<String, dynamic> json) {
     iteamsId = json['iteams_id'];
@@ -57,6 +59,7 @@ class TopSailerModel {
     categoriesImage = json['categories_image'];
     categoriesDatetime = json['categories_datetime'];
     topSailer = json['TopSailer'];
+    iteamPriceDescount = json['iteamPriceDescount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -79,6 +82,7 @@ class TopSailerModel {
     data['categories_image'] = this.categoriesImage;
     data['categories_datetime'] = this.categoriesDatetime;
     data['TopSailer'] = this.topSailer;
+    data['iteamPriceDescount'] = this.iteamPriceDescount;
     return data;
   }
 }

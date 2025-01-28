@@ -45,14 +45,14 @@ class ItemsDetailsPage extends StatelessWidget {
                         itemsDetailController.iteamsModel.iteamPriceDescount!,
                     addCount: () async {
                       itemsDetailController.countItemInCart++;
-                    await cartContoller.addToCart(
+                      await cartContoller.addToCart(
                           itemsDetailController.iteamsModel.iteamsId!);
                       itemsDetailController.update();
                     },
-                    removeCount: () async{
+                    removeCount: () async {
                       if (itemsDetailController.countItemInCart != 0) {
                         itemsDetailController.countItemInCart--;
-                      await  cartContoller.removeFromCart(
+                        await cartContoller.removeFromCart(
                             itemsDetailController.iteamsModel.iteamsId!);
                         itemsDetailController.update();
                       } else {

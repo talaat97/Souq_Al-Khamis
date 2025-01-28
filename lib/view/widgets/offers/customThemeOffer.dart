@@ -10,11 +10,11 @@ import '../../../controller/home/offers_controller.dart';
 import '../../../link_api.dart';
 
 class CustomThemeOffer extends StatelessWidget {
-  final OfferModel iteamsModel;
+  final OfferModel offerModel;
 
   const CustomThemeOffer({
     super.key,
-    required this.iteamsModel,
+    required this.offerModel,
   });
 
   @override
@@ -22,71 +22,106 @@ class CustomThemeOffer extends StatelessWidget {
     var controller = Get.find<OffersController>();
     return InkWell(
       onTap: () {
-        controller.goToIteamsDetails(iteamsModel);
+        controller.goToIteamsDetails(offerModel);
       },
       child: Card(
         color: AppColor.grey200,
+        elevation: 5,
         child: Stack(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Hero(
-                  tag: '${iteamsModel.iteamsId}',
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        "${Applink.iteamsLink}/${iteamsModel.iteamsImage}",
-                    height: 200,
-                    fit: BoxFit.contain,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  Hero(
+                    tag: '${offerModel.iteamsId}',
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "${Applink.iteamsLink}/${offerModel.iteamsImage}",
+                      height: 150,
+                    ),
                   ),
-                ),
-                Text(
-                  tr(iteamsModel.iteamsName, iteamsModel.iteamsNameAr),
-                  style: const TextStyle(
-                      fontSize: 25,
-                      color: AppColor.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  tr(iteamsModel.iteamsDec, iteamsModel.iteamsDecAr),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Rating'),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    ...List.generate(
-                      5,
-                      (index) => const Icon(
-                        Icons.star_border,
-                        size: 15,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      '${iteamsModel.iteamPriceDescount}' '\$',
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      tr(offerModel.iteamsName, offerModel.iteamsNameAr),
                       style: const TextStyle(
-                          fontSize: 25, color: AppColor.primaryColor),
+                          fontSize: 25,
+                          color: AppColor.black,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ],
-                )
-              ],
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "category: ${offerModel.categoriesName!}|Offer: ${offerModel.iteamsDiscount}%",
+                      style: const TextStyle(
+                          fontSize: 20, color: AppColor.secondColor),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      tr(offerModel.iteamsDec, offerModel.iteamsDecAr),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Text(
+                            'Rating:',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: AppColor.primaryColor),
+                          ),
+                          ...List.generate(
+                            5,
+                            (index) =>
+                                index < num.parse(offerModel.ratingAvr ?? '2')
+                                    ? const Icon(
+                                        Icons.star_border_outlined,
+                                        color: AppColor.primaryColor,
+                                        size: 27,
+                                      )
+                                    : const Icon(Icons.star_border,
+                                        color: AppColor.black, size: 27),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '${offerModel.iteamsPrice}' '\$',
+                        style: const TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            color: AppColor.primaryColor),
+                      ),
+                      Text(
+                        '${offerModel.iteamPriceDescount}' '\$',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: AppColor.primaryColor),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
             Positioned(
               top: 0,
               child: Image.asset(
                 AppImageAsset.saleImgae,
-                height: 70,
-                width: 70,
+                height: 80,
+                width: 80,
               ),
             )
           ],

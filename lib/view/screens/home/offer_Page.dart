@@ -31,7 +31,7 @@ class OfferPage extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: controller.offerIteams.length,
                   itemBuilder: (context, index) => CustomThemeOffer(
-                      iteamsModel: controller.offerIteams[index]),
+                      offerModel: controller.offerIteams[index]),
                 )),
           )
         ],

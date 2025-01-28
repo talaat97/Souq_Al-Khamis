@@ -26,7 +26,7 @@ class Listiteams extends GetView<HomeControllerImp> {
   }
 }
 
-class Iteams extends StatelessWidget {
+class Iteams extends GetView<HomeControllerImp> {
   final TopSailerModel topSailerModel;
   final int topSalier;
 
@@ -35,36 +35,41 @@ class Iteams extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      color: AppColor.grey200,
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+    return InkWell(
+      onTap: () {
+        controller.goToitemsDeails(topSailerModel);
+      },
+      child: Card(
+        elevation: 5,
+        color: AppColor.grey200,
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Image.network(
+                "${Applink.iteamsLink}/${topSailerModel.iteamsImage}",
+                height: 140,
+                width: 149,
+              ),
             ),
-            child: Image.network(
-              "${Applink.iteamsLink}/${topSailerModel.iteamsImage}",
-              height: 140,
-              width: 149,
+            Container(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
+                  color: AppColor.primaryColor,
+                  borderRadius:
+                      BorderRadius.only(bottomRight: Radius.circular(20))),
+              child: Text(
+                "Top $topSalier ",
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.white),
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5),
-            decoration: const BoxDecoration(
-                color: AppColor.primaryColor,
-                borderRadius:
-                    BorderRadius.only(bottomRight: Radius.circular(20))),
-            child: Text(
-              "Top $topSalier ",
-              style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.white),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

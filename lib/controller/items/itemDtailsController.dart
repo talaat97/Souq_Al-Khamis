@@ -50,6 +50,10 @@ class ItemsDetailControllerImp extends ItemsDetailController {
   intialData() async {
     statusRequest = StatusRequest.loading;
     iteamsModel = Get.arguments['itemModel'];
+    print('////////////////////////////////////////////////////////////////');
+    print(iteamsModel);
+    print('////////////////////////////////////////////////////////////////');
+
     await getCount(iteamsModel.iteamsId!);
     statusRequest = StatusRequest.sucess;
     update();
