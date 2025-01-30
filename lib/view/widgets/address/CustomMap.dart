@@ -22,7 +22,7 @@ class CustomMap extends StatelessWidget {
             },
             markers: pageController.marker.toSet(),
             onTap: (LatLng argument) {
-              pageController.addMarkerOfMyplace(argument);
+              pageController.addMarker(argument);
             },
           )),
     );

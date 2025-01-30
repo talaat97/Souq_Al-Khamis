@@ -23,7 +23,7 @@ class CuttomButtonOfCart extends StatelessWidget {
     required this.coupon,
   });
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<CartController>(
       builder: (controller) => controller.hideBill
@@ -35,9 +35,9 @@ class CuttomButtonOfCart extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(15),
                   child: const Icon(
-                    Icons.arrow_downward_sharp,
+                    Icons.keyboard_arrow_up,
                     color: AppColor.black,
-                    size: 25,
+                    size: 30,
                   )),
               onPressed: () {
                 controller.hideBill = !controller.hideBill;
@@ -55,13 +55,13 @@ class CuttomButtonOfCart extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.all(15),
                       child: const Icon(
-                        Icons.arrow_upward_outlined,
+                        Icons.keyboard_arrow_down,
                         color: AppColor.black,
-                        size: 25,
+                        size: 15,
                       )),
                   onPressed: () {
                     controller.hideBill = !controller.hideBill;
-                     controller.update();
+                    controller.update();
                   },
                 ),
                 controller.couponName == null

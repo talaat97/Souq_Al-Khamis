@@ -14,7 +14,7 @@ class CheckoutContoller extends GetxController {
   CheckoutData checkoutData = Get.put(CheckoutData(Get.find()));
   String? paymentType;
   String? deliverType;
-  String? address;
+  String? addressId;
   late String orderPrice;
   late String couponId;
   late String couponDiscount;
@@ -35,11 +35,11 @@ class CheckoutContoller extends GetxController {
   }
 
   chooseShippigAddress(String val) {
-    address = val;
+    addressId = val;
     update();
   }
 
-  viewAddresses() async {
+  getAddresses() async {
     addresses.clear();
     statusRequest = StatusRequest.loading;
     var response = await addressData.viewAddress(
@@ -51,8 +51,7 @@ class CheckoutContoller extends GetxController {
       if (response['status'] == 'success') {
         List responsedata = response['data'];
         addresses.addAll(responsedata.map((e) => AddressModel.fromJson(e)));
-      } else {
-        statusRequest = StatusRequest.failure;
+        addressId = addresses[0].addressId.toString();
       }
     }
     update();
@@ -65,13 +64,13 @@ class CheckoutContoller extends GetxController {
     if (deliverType == null) {
       return Get.snackbar('sory', 'you have to add delivery way');
     }
-    if (deliverType == '0' && address == null) {
+    if (deliverType == '0' && addressId == null) {
       return Get.snackbar(
-          'sory', 'you have to Choose the location if u want delivery');
+          'sory', 'you have to Choose the location if you want delivery');
     }
     Map data = {
       'userId': myServices.sharedPreferences.getString('id').toString(),
-      'addressId': address ?? '0',
+      'addressId': addressId ?? '0',
       'odrderType': deliverType,
       'priceDelivery': shipping,
       'ordersPrice': orderPrice,
@@ -93,13 +92,17 @@ class CheckoutContoller extends GetxController {
     }
   }
 
+  goToAddress() {
+    Get.toNamed(AppRoute.addressAdd);
+  }
+
   @override
   void onInit() {
     orderPrice = Get.arguments['orderPrice'].toString();
     couponId = Get.arguments['couponId'].toString();
     couponDiscount = Get.arguments['couponDiscount'].toString();
     shipping = Get.arguments['shipping'].toString();
-    viewAddresses();
+    getAddresses();
     super.onInit();
   }
 }

@@ -40,7 +40,7 @@ class CustombottomShet extends StatelessWidget {
                           myController: pageController.name,
                           myIcon: Icons.location_pin,
                           valid: (val) {
-                            return checkVaild(val!, 5, 100, 'password');
+                            return checkVaild(val!, 3, 100, 'password');
                           }),
                       const SizedBox(height: 20),
                       CustomTextField(

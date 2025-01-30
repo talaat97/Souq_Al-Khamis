@@ -82,7 +82,7 @@ class CustomThemeOffer extends StatelessWidget {
                           ...List.generate(
                             5,
                             (index) =>
-                                index < num.parse(offerModel.ratingAvr ?? '2')
+                                index < num.parse(offerModel.ratingAvr ?? '1')
                                     ? const Icon(
                                         Icons.star_border_outlined,
                                         color: AppColor.primaryColor,

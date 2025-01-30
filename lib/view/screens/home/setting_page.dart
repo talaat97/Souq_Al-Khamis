@@ -3,9 +3,6 @@ import 'package:e_comerse_app/core/constant/colors.dart';
 import 'package:e_comerse_app/core/constant/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-bool val = true;
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -47,14 +44,13 @@ class SettingPage extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text('50'.tr),
-                  onTap: () {},
                   trailing: GetBuilder<SettingsContoller>(
                     builder: (controller) => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: val,
+                      value: controller.notifactionSwitch,
                       onChanged: (value) {
-                        val = value;
-                        controller.update();
+                        controller.notifactionSwitch = value;
+                        controller.diableNotification();
                       },
                     ),
                   ),
@@ -77,7 +73,7 @@ class SettingPage extends StatelessWidget {
                 ListTile(
                   title: Text('53'.tr),
                   onTap: () {
-                    launchUrl(Uri.parse('tel:+201113809492'));
+                    controller.phoneCall();
                   },
                   trailing: const Icon(Icons.phone),
                 ),

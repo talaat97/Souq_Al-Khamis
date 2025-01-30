@@ -92,22 +92,51 @@ class Checkout extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: AppColor.secondColor)),
                       const SizedBox(height: 10),
-                      ...List.generate(
-                        contoller.addresses.length,
-                        (index) => InkWell(
-                          onTap: () {
-                            contoller.chooseShippigAddress(
-                                contoller.addresses[index].addressId!);
-                          },
-                          child: CardShppingAddressCheckout(
-                              title:
-                                  "${contoller.addresses[index].addressName}",
-                              body:
-                                  "${contoller.addresses[index].addressCity} | ${contoller.addresses[index].addressStreet}",
-                              isactive: controller.address ==
-                                  contoller.addresses[index].addressId!),
+                      if (contoller.addresses.isEmpty &&
+                          controller.deliverType == "0")
+                        Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 100),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  "No Address Found , please enter location first",
+                                  style: TextStyle(
+                                    color: AppColor.grey,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    controller.goToAddress();
+                                  },
+                                  child: const Text(
+                                    " Click here ",
+                                    style: TextStyle(
+                                        color: AppColor.primaryColor,
+                                        fontSize: 20),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ))
+                      else
+                        ...List.generate(
+                          contoller.addresses.length,
+                          (index) => InkWell(
+                            onTap: () {
+                              contoller.chooseShippigAddress(
+                                  contoller.addresses[index].addressId!);
+                            },
+                            child: CardShppingAddressCheckout(
+                                title:
+                                    "${contoller.addresses[index].addressName}",
+                                body:
+                                    "${contoller.addresses[index].addressCity} | ${contoller.addresses[index].addressStreet}",
+                                isactive: controller.addressId ==
+                                    contoller.addresses[index].addressId!),
+                          ),
                         ),
-                      ),
                     ],
                   ),
               ]),

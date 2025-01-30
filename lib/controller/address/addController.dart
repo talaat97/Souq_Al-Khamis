@@ -35,21 +35,20 @@ class AddressEditController extends GetxController {
       );
       if (response['status'] == "success") {
         goToAddressView();
-        print('=================================== location saved correct');
+        Get.snackbar('Well done !', 'Now you can order from this address');
       } else if (response['status'] == "failure") {
         print('=================================== location response failure');
-      } else {
-        print('=================================== location error');
       }
     }
   }
 
-  addMarkerOfMyplace(argument) {
+  addMarker(LatLng argument) {
     marker.clear();
     marker.add(Marker(
       markerId: const MarkerId('1'),
       position: argument,
     ));
+
     latLng = argument;
     update();
   }
@@ -60,6 +59,7 @@ class AddressEditController extends GetxController {
       target: LatLng(position!.latitude, position!.longitude),
       zoom: 12,
     );
+    addMarker(LatLng(position!.latitude, position!.longitude));
     statusRequest = StatusRequest.sucess;
     update();
   }
