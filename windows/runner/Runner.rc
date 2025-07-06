@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "e_comerse_app" "\0"
+            VALUE "FileDescription", "souq_al_khamis" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "e_comerse_app" "\0"
+            VALUE "InternalName", "souq_al_khamis" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "e_comerse_app.exe" "\0"
-            VALUE "ProductName", "e_comerse_app" "\0"
+            VALUE "OriginalFilename", "souq_al_khamis.exe" "\0"
+            VALUE "ProductName", "souq_al_khamis" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

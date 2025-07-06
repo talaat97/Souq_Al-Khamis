@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/core/services/services.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:get/get.dart';
 import '../../core/class/status_request.dart';
 import '../../core/function/handling_data_controller.dart';
@@ -84,6 +84,4 @@ class FavoriteController extends GetxController {
   //     'itemModel': iteamsModel,
   //   });
   // }
-
-
 }

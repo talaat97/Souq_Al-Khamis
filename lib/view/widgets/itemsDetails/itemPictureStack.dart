@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,16 +37,17 @@ class TopProductPageDetails extends GetView<ItemsDetailControllerImp> {
                     imageUrl: "${Applink.iteamsLink}"
                         '/'
                         "${controller.iteamsModel.iteamsImage}"),
-                controller.iteamsModel.iteamsDiscount != "0"?
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  child: Image.asset(
-                    AppImageAsset.saleImgae,
-                    height: 100,
-                    width: 100,
-                  ),
-                ):Container()
+                controller.iteamsModel.iteamsDiscount != "0"
+                    ? Positioned(
+                        bottom: 0,
+                        left: 0,
+                        child: Image.asset(
+                          AppImageAsset.saleImgae,
+                          height: 100,
+                          width: 100,
+                        ),
+                      )
+                    : Container()
               ],
             ),
           ),

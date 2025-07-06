@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_comerse_app/controller/favorite/favoriteController.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/core/function/translate_database.dart';
-import 'package:e_comerse_app/data/model/favorite_model.dart';
+import 'package:souq_al_khamis/controller/favorite/favoriteController.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/core/function/translate_database.dart';
+import 'package:souq_al_khamis/data/model/favorite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

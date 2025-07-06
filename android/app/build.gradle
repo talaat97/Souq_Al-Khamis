@@ -27,7 +27,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "com.talaat.e_comerse_app"
+    namespace = "com.talaat.souq_al_khamis"
     compileSdkVersion = 34
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.talaat.e_comerse_app"
+        applicationId = "com.talaat.souq_al_khamis"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = 26
@@ -64,4 +64,10 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // START: FlutterFire Configuration
+    implementation platform('com.google.firebase:firebase-bom:33.16.0')
+    // END: FlutterFire Configuration
 }

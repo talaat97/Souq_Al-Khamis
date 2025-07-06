@@ -1,9 +1,9 @@
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/core/function/handling_data_controller.dart';
-import 'package:e_comerse_app/data/model/order_model.dart';
-import 'package:e_comerse_app/view/widgets/order/archiveThemeCard.dart';
-import 'package:e_comerse_app/view/widgets/order/pendingThemeCard.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/function/handling_data_controller.dart';
+import 'package:souq_al_khamis/data/model/order_model.dart';
+import 'package:souq_al_khamis/view/widgets/order/archiveThemeCard.dart';
+import 'package:souq_al_khamis/view/widgets/order/pendingThemeCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,24 +31,32 @@ class OrderController extends GetxController {
   }
 
   printOrderStatus(String val) {
-    if (val == '0') {
-      return 'wait approve';
-    }
     if (val == '1') {
-      return 'On Way';
-    } else {
-      return 'archived';
+      return 'Wait approve';
+    }
+    if (val == '2') {
+      return 'Preparing';
+    }
+    if (val == '3') {
+      return 'On way';
+    }
+    if (val == '4') {
+      return 'Archived';
     }
   }
 
   colorCard(String val) {
-    if (val == '0') {
-      return Colors.amber;
-    }
     if (val == '1') {
+      return const Color.fromARGB(255, 255, 196, 3);
+    }
+    if (val == '2') {
+      return const Color.fromARGB(150, 255, 196, 3);
+    }
+    if (val == '3') {
       return Colors.green;
-    } else {
-      return const Color.fromARGB(255, 22, 78, 24);
+    }
+    if (val == '4') {
+      return Colors.grey;
     }
   }
 

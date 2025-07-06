@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:e_comerse_app/core/class/status_request.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
 
 import '../function/check_internet.dart';
 import 'package:http/http.dart' as http;

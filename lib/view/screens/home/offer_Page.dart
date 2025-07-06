@@ -1,7 +1,7 @@
-import 'package:e_comerse_app/controller/home/offers_controller.dart';
-import 'package:e_comerse_app/core/class/handling_data.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/view/widgets/offers/customThemeOffer.dart';
+import 'package:souq_al_khamis/controller/home/offers_controller.dart';
+import 'package:souq_al_khamis/core/class/handling_data.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/view/widgets/offers/customThemeOffer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,9 +12,10 @@ class OfferPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(OffersController());
     return Scaffold(
+      backgroundColor: AppColor.thirdColor,
       appBar: AppBar(
         toolbarHeight: 50,
-        backgroundColor: AppColor.black,
+        backgroundColor: AppColor.secondColor,
         title: const Text(
           'Offers',
           style: TextStyle(color: AppColor.primaryColor),

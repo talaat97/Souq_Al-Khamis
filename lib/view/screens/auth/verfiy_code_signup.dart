@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/core/class/status_request.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,8 +51,7 @@ class VerfiyCodeSignUp extends StatelessWidget {
                           height: 60,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              border:
-                                  Border.all(color: AppColor.primaryColor)),
+                              border: Border.all(color: AppColor.primaryColor)),
                           textStyle: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w600),
                         ),
@@ -64,11 +63,11 @@ class VerfiyCodeSignUp extends StatelessWidget {
                       CustomButtonInLogeIn(
                         text: 'resend virify code',
                         onTap: () {
-                              controller.reSend();
+                          controller.reSend();
                         },
                       )
                     ],
-                 ),
+                  ),
                 ),
         ));
   }

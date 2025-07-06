@@ -1,6 +1,6 @@
 {
-    "name": "e_comerse_app",
-    "short_name": "e_comerse_app",
+    "name": "souq_al_khamis",
+    "short_name": "souq_al_khamis",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

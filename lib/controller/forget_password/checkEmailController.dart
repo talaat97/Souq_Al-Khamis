@@ -1,5 +1,5 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/data/datasourse/remote/Auth/forget_password/check_email_data.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/Auth/forget_password/check_email_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +33,7 @@ class CheckPasswordControllerImp extends CheckPasswordController {
       if (StatusRequest.sucess == statusRequest) {
         if (response['status'] == "success") {
           Get.offNamed(AppRoute.verfiyCodeCheckEmail, arguments: {
-            'email':email.text,
+            'email': email.text,
           });
           print(
               'the email that is send ========================================${email.text}');

@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/controller/settings/settings_contoller.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/core/constant/image_assets.dart';
+import 'package:souq_al_khamis/controller/settings/settings_contoller.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/core/constant/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,43 +10,48 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(SettingsContoller());
-
-    return ListView(
-      children: [
-        Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            Container(
-              height: Get.width / 3,
-              color: AppColor.primaryColor,
-            ),
-            Positioned(
-                top: Get.width / 4.8,
-                child: Container(
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100)),
-                  child: const CircleAvatar(
-                    radius: 60,
-                    backgroundColor: AppColor.primaryColor,
-                    backgroundImage: AssetImage(AppImageAsset.logo),
-                  ),
-                ))
-          ],
-        ),
-        const SizedBox(height: 80),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Card(
+    return Container(
+      color: AppColor.thirdColor,
+      child: ListView(
+        children: [
+          Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: Get.width / 3,
+                color: AppColor.primaryColor,
+              ),
+              Positioned(
+                  top: Get.width / 6,
+                  child: Container(
+                    padding: const EdgeInsets.all(7),
+                    decoration: BoxDecoration(
+                        color: AppColor.white,
+                        borderRadius: BorderRadius.circular(100)),
+                    child: const CircleAvatar(
+                      radius: 90,
+                      backgroundColor: AppColor.primaryColor,
+                      backgroundImage:
+                          AssetImage(AppImageAsset.onBoardingImageOne),
+                    ),
+                  ))
+            ],
+          ),
+          const SizedBox(height: 150),
+          Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            color: AppColor.primaryColor,
             child: Column(
               children: [
                 ListTile(
-                  title: Text('50'.tr),
+                  title: Text(
+                    '50'.tr,
+                    style: const TextStyle(color: AppColor.grey),
+                  ),
                   trailing: GetBuilder<SettingsContoller>(
                     builder: (controller) => Switch(
-                      activeColor: AppColor.primaryColor,
+                      activeColor: AppColor.grey,
                       value: controller.notifactionSwitch,
                       onChanged: (value) {
                         controller.notifactionSwitch = value;
@@ -56,48 +61,73 @@ class SettingPage extends StatelessWidget {
                   ),
                 ),
                 const Divider(),
-                ListTile(
-                  title: Text('51'.tr),
-                  onTap: () {
-                    controller.goToAddressPage();
-                  },
-                  trailing: const Icon(Icons.location_pin),
-                ),
+                TextInCardSeetting(
+                    title: '51'.tr,
+                    onTap: () {
+                      controller.goToAddressPage();
+                    },
+                    icon: Icons.location_pin),
                 const Divider(),
-                ListTile(
-                  title: Text('52'.tr),
-                  onTap: () {},
-                  trailing: const Icon(Icons.adb_outlined),
-                ),
+                TextInCardSeetting(
+                    title: '52'.tr,
+                    onTap: () {
+                      controller.goToAddressPage();
+                    },
+                    icon: Icons.adb_outlined),
                 const Divider(),
-                ListTile(
-                  title: Text('53'.tr),
-                  onTap: () {
-                    controller.phoneCall();
-                  },
-                  trailing: const Icon(Icons.phone),
-                ),
+                TextInCardSeetting(
+                    title: '53'.tr,
+                    onTap: () {
+                      controller.phoneCall();
+                    },
+                    icon: Icons.phone),
                 const Divider(),
-                ListTile(
-                  title: Text('55'.tr),
-                  onTap: () {
-                    controller.changeLang();
-                  },
-                  trailing: const Icon(Icons.language),
-                ),
+                TextInCardSeetting(
+                    title: '55'.tr,
+                    onTap: () {
+                      controller.changeLang();
+                    },
+                    icon: Icons.language),
                 const Divider(),
-                ListTile(
-                  title: Text('54'.tr),
-                  onTap: () {
-                    controller.logOut();
-                  },
-                  trailing: const Icon(Icons.logout),
-                ),
+                TextInCardSeetting(
+                    title: '54'.tr,
+                    onTap: () {
+                      controller.logOut();
+                    },
+                    icon: Icons.logout_outlined),
               ],
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TextInCardSeetting extends StatelessWidget {
+  final String title;
+  final void Function()? onTap;
+  final IconData icon;
+  const TextInCardSeetting({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        title,
+        style: const TextStyle(color: AppColor.grey),
+      ),
+      onTap: onTap,
+      trailing: Icon(
+        icon,
+        color: AppColor.grey,
+        size: 30,
+      ),
     );
   }
 }

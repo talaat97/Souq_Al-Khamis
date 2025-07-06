@@ -1,5 +1,5 @@
-import 'package:e_comerse_app/core/class/status_request.dart';
-import 'package:e_comerse_app/data/datasourse/remote/test_data.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/test_data.dart';
 import 'package:get/get.dart';
 
 import '../core/function/handling_data_controller.dart';
@@ -25,7 +25,6 @@ class TestController extends GetxController {
       }
     }
     update();
-
   }
 
   @override

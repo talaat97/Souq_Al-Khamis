@@ -1,7 +1,7 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/view/screens/home/offer_Page.dart';
-import 'package:e_comerse_app/view/screens/order/orders.dart';
-import 'package:e_comerse_app/view/screens/home/home_page.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/view/screens/home/offer_Page.dart';
+import 'package:souq_al_khamis/view/screens/order/orders.dart';
+import 'package:souq_al_khamis/view/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

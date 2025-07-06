@@ -1,8 +1,8 @@
-import 'package:e_comerse_app/controller/home/home_controller.dart';
-import 'package:e_comerse_app/data/model/topSailer_model.dart';
+import 'package:souq_al_khamis/data/model/topSailer_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controller/home/home_controller.dart';
 import '../../../core/constant/colors.dart';
 import '../../../link_api.dart';
 
@@ -11,6 +11,7 @@ class Listiteams extends GetView<HomeControllerImp> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeControllerImp());
     return Container(
       margin: const EdgeInsets.only(top: 5),
       height: 150,

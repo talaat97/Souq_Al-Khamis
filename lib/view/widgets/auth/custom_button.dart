@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/core/constant/colors.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonInLogeIn extends StatelessWidget {
@@ -16,7 +16,10 @@ class CustomButtonInLogeIn extends StatelessWidget {
       onPressed: onTap,
       child: Text(
         text,
-        style: Theme.of(context).textTheme.labelMedium!.copyWith(color:Colors.white ),
+        style: Theme.of(context)
+            .textTheme
+            .labelMedium!
+            .copyWith(color: Colors.white),
       ),
     );
   }

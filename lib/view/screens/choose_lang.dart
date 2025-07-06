@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/core/localization/change_local.dart';
-import 'package:e_comerse_app/view/widgets/language/custom_button.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/localization/change_local.dart';
+import 'package:souq_al_khamis/view/widgets/language/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

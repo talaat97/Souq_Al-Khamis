@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/controller/address/addController.dart';
-import 'package:e_comerse_app/core/class/handling_data.dart';
-import 'package:e_comerse_app/view/widgets/address/CustomBottomShet.dart';
+import 'package:souq_al_khamis/controller/address/addController.dart';
+import 'package:souq_al_khamis/core/class/handling_data.dart';
+import 'package:souq_al_khamis/view/widgets/address/CustomBottomShet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

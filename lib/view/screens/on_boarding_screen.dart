@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/controller/on_boarding_controller.dart';
+import 'package:souq_al_khamis/controller/on_boarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

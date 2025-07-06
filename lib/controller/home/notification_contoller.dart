@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/data/datasourse/remote/notification/notification_data.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/notification/notification_data.dart';
 
 import 'package:get/get.dart';
 

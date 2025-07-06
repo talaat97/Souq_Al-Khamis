@@ -1,4 +1,4 @@
-name: e_comerse_app
+name: souq_al_khamis
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -61,7 +61,6 @@ dependencies:
   path: 
   # Qrcode 
   qr_flutter: 
-  scan: 
   grouped_list:
   url_launcher: 
   dropdown_search: 
@@ -75,15 +74,15 @@ dependencies:
   google_sign_in:   
   device_preview: 
   responsive_builder:
-  image_pickers: 
+
   #Other
   pinput: 
   lottie: 
   dio: 
   googleapis_auth:
-  googleapis:
-  flutter_ringtone_player: ^4.0.0+3
-  rating_dialog: ^2.0.4
+  googleapis: 
+  rating_dialog: 
+  flutter_ringtone_player: ^4.0.0+4
 
 
 dev_dependencies:

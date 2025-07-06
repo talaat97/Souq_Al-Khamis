@@ -1,5 +1,5 @@
-import 'package:e_comerse_app/core/constant/themes.dart';
-import 'package:e_comerse_app/core/services/services.dart';
+import 'package:souq_al_khamis/core/constant/themes.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
-import 'package:e_comerse_app/core/class/status_request.dart';
-import 'package:e_comerse_app/core/services/services.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:get/get.dart';
 
 import '../../core/constant/routs_page.dart';

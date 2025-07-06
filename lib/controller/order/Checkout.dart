@@ -1,11 +1,12 @@
-import 'package:e_comerse_app/core/class/status_request.dart';
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/core/services/services.dart';
-import 'package:e_comerse_app/data/model/location_Model.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
+import 'package:souq_al_khamis/data/model/location_Model.dart';
 
 import 'package:get/get.dart';
 
 import '../../core/function/handling_data_controller.dart';
+import '../../core/function/notification_helper.dart';
 import '../../data/datasourse/remote/address/address.dart';
 import '../../data/datasourse/remote/orders/Checkout_data.dart';
 
@@ -19,7 +20,7 @@ class CheckoutContoller extends GetxController {
   late String couponId;
   late String couponDiscount;
   late String shipping;
-
+  late var deviseToken;
   List<AddressModel> addresses = [];
   AddressData addressData = AddressData(Get.find());
   MyServices myServices = Get.find();
@@ -77,6 +78,7 @@ class CheckoutContoller extends GetxController {
       'paymentMethod': paymentType,
       'couponId': couponId,
       'couponDiscount': couponDiscount,
+      'userDeviceToken': deviseToken,
     };
     statusRequest = StatusRequest.loading;
 
@@ -102,6 +104,7 @@ class CheckoutContoller extends GetxController {
     couponId = Get.arguments['couponId'].toString();
     couponDiscount = Get.arguments['couponDiscount'].toString();
     shipping = Get.arguments['shipping'].toString();
+    deviseToken = NotificationsHelper.firebaseMessaging.getToken();
     getAddresses();
     super.onInit();
   }

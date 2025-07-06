@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:e_comerse_app/core/class/status_request.dart';
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/core/services/services.dart';
-import 'package:e_comerse_app/data/datasourse/remote/address/address.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/address/address.dart';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';

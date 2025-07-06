@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/controller/order/orderController.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/core/constant/image_assets.dart';
+import 'package:souq_al_khamis/controller/order/orderController.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/core/constant/image_assets.dart';
 import 'package:get/get.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 import 'package:flutter/material.dart';

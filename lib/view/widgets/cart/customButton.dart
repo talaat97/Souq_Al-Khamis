@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/controller/cart/cartContoller.dart';
+import 'package:souq_al_khamis/controller/cart/cartContoller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -112,9 +112,9 @@ class CuttomButtonOfCart extends StatelessWidget {
                       ),
                 Container(
                   margin: const EdgeInsets.all(10),
-                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      color: AppColor.primaryColor,
+                      borderRadius: BorderRadius.circular(15),
                       border:
                           Border.all(color: AppColor.primaryColor, width: 1)),
                   child: Column(

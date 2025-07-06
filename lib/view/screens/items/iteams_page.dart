@@ -1,8 +1,8 @@
-import 'package:e_comerse_app/controller/favorite/favoriteController.dart';
-import 'package:e_comerse_app/controller/items/itemsControlller.dart';
-import 'package:e_comerse_app/core/class/handling_data.dart';
-import 'package:e_comerse_app/data/model/iteams_model.dart';
-import 'package:e_comerse_app/view/widgets/items/CustomlistItems.dart';
+import 'package:souq_al_khamis/controller/favorite/favoriteController.dart';
+import 'package:souq_al_khamis/controller/items/itemsControlller.dart';
+import 'package:souq_al_khamis/core/class/handling_data.dart';
+import 'package:souq_al_khamis/data/model/iteams_model.dart';
+import 'package:souq_al_khamis/view/widgets/items/CustomlistItems.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

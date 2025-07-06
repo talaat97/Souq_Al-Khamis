@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/core/services/services.dart';
-import 'package:e_comerse_app/data/datasourse/static/static.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
+import 'package:souq_al_khamis/data/datasourse/static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,7 @@ class OnBoardingControllerTmp extends OnBoardingController {
   @override
   next() {
     currentIndex++;
-    //set key to know if he saw onboarding sreen 
+    //set key to know if he saw onboarding sreen
     myServices.sharedPreferences.setString("step", "onboarding");
     if (currentIndex > onBoardingList.length - 1) {
       Get.offAllNamed(AppRoute.login);

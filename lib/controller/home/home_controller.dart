@@ -1,10 +1,10 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/core/services/services.dart';
-import 'package:e_comerse_app/data/datasourse/remote/home/home_data.dart';
-import 'package:e_comerse_app/data/model/categoires_model.dart';
-import 'package:e_comerse_app/data/model/iteams_model.dart';
-import 'package:e_comerse_app/core/function/notification_helper.dart';
-import 'package:e_comerse_app/data/model/topSailer_model.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/home/home_data.dart';
+import 'package:souq_al_khamis/data/model/categoires_model.dart';
+import 'package:souq_al_khamis/data/model/iteams_model.dart';
+import 'package:souq_al_khamis/core/function/notification_helper.dart';
+import 'package:souq_al_khamis/data/model/topSailer_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +36,6 @@ class HomeControllerImp extends HomeController {
     NotificationsHelper.firebaseMessaging.subscribeToTopic("users");
     initialData();
     getData();
-
     super.onInit();
   }
 
@@ -129,13 +128,12 @@ class SearchMixController extends GetxController {
     if (val == '') {
       statusRequest = StatusRequest.none;
       isSearch = false;
+      update();
     }
     /////////////////// if u want to make it auto search /////////////////////
-    //  else {
-    //   isSearch = true;
-    //   search();
-    // }
-    update();
+    else {
+      goSearch();
+    }
   }
 
   goSearch() {

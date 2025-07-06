@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:e_comerse_app/core/class/status_request.dart';
-import 'package:e_comerse_app/data/datasourse/remote/orders/orderDetailsData.dart';
-import 'package:e_comerse_app/data/model/orderDetailsModel.dart';
+import 'package:souq_al_khamis/core/class/status_request.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/orders/orderDetailsData.dart';
+import 'package:souq_al_khamis/data/model/orderDetailsModel.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -69,7 +69,6 @@ class Orderdetailscontroller extends GetxController {
   void onInit() {
     orderModel = Get.arguments['orderModel'];
     intialData();
-
     googleMapController = Completer<GoogleMapController>();
     super.onInit();
   }

@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/data/datasourse/remote/cart/cart_data.dart';
-import 'package:e_comerse_app/data/model/cart_Model.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/cart/cart_data.dart';
+import 'package:souq_al_khamis/data/model/cart_Model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../core/class/status_request.dart';

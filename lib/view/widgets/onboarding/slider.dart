@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/controller/on_boarding_controller.dart';
+import 'package:souq_al_khamis/controller/on_boarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +22,7 @@ class CutomSliderOnBoarding extends GetView<OnBoardingControllerTmp> {
             children: [
               Image.asset(
                 onBoardingList[index].image!,
-               height: 300,
+                height: 300,
               ),
               const SizedBox(height: 20),
               Text(

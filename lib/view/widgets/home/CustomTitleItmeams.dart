@@ -1,4 +1,4 @@
-import 'package:e_comerse_app/controller/home/home_controller.dart';
+import 'package:souq_al_khamis/controller/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +14,8 @@ class Customtitleitmeams extends GetView<HomeControllerImp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: controller.lang =='ar'? Alignment.topRight:Alignment.topLeft,
+      alignment:
+          controller.lang == 'ar' ? Alignment.topRight : Alignment.topLeft,
       child: Text(
         title,
         style: Theme.of(context)

@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/controller/cart/cartContoller.dart';
-import 'package:e_comerse_app/core/function/translate_database.dart';
-import 'package:e_comerse_app/view/widgets/cart/customthemecart.dart';
+import 'package:souq_al_khamis/controller/cart/cartContoller.dart';
+import 'package:souq_al_khamis/core/function/translate_database.dart';
+import 'package:souq_al_khamis/view/widgets/cart/customthemecart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/cart/customButton.dart';

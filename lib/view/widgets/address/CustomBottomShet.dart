@@ -1,5 +1,5 @@
-import 'package:e_comerse_app/view/widgets/address/CustombuttonAddress.dart';
-import 'package:e_comerse_app/view/widgets/auth/text_field.dart';
+import 'package:souq_al_khamis/view/widgets/address/CustombuttonAddress.dart';
+import 'package:souq_al_khamis/view/widgets/auth/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

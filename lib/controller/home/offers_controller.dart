@@ -1,6 +1,6 @@
-import 'package:e_comerse_app/core/constant/routs_page.dart';
-import 'package:e_comerse_app/data/datasourse/remote/offer/offer_data.dart';
-import 'package:e_comerse_app/data/model/offer_model.dart';
+import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/data/datasourse/remote/offer/offer_data.dart';
+import 'package:souq_al_khamis/data/model/offer_model.dart';
 import 'package:get/get.dart';
 import '../../core/class/status_request.dart';
 import '../../core/function/handling_data_controller.dart';

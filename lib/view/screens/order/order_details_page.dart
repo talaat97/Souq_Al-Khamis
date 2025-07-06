@@ -1,7 +1,7 @@
-import 'package:e_comerse_app/controller/order/orderDetailsController.dart';
-import 'package:e_comerse_app/core/class/handling_data.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/view/widgets/order/details_text_table_style.dart';
+import 'package:souq_al_khamis/controller/order/orderDetailsController.dart';
+import 'package:souq_al_khamis/core/class/handling_data.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/view/widgets/order/details_text_table_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -91,7 +91,7 @@ class OrderDetails extends StatelessWidget {
                     subtitleTextStyle:
                         const TextStyle(color: AppColor.black, fontSize: 15),
                   ),
-                if (pageController.orderModel.orderType == '0')
+                if (pageController.orderModel.orderAddress == '1')
                   Container(
                     height: 350,
                     child: GoogleMap(

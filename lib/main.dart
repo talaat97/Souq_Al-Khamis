@@ -1,9 +1,9 @@
-import 'package:e_comerse_app/binding/initial-binding.dart';
-import 'package:e_comerse_app/core/localization/change_local.dart';
-import 'package:e_comerse_app/core/localization/translation.dart';
-import 'package:e_comerse_app/core/services/services.dart';
+import 'package:souq_al_khamis/binding/initial-binding.dart';
+import 'package:souq_al_khamis/core/localization/change_local.dart';
+import 'package:souq_al_khamis/core/localization/translation.dart';
+import 'package:souq_al_khamis/core/services/services.dart';
 
-import 'package:e_comerse_app/routs.dart';
+import 'package:souq_al_khamis/routs.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

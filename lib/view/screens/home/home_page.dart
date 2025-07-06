@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_comerse_app/core/class/handling_data.dart';
-import 'package:e_comerse_app/core/constant/colors.dart';
-import 'package:e_comerse_app/view/widgets/home/CustomCardHome.dart';
-import 'package:e_comerse_app/view/widgets/home/CustomTitleItmeams.dart';
-import 'package:e_comerse_app/view/widgets/home/ListIteams.dart';
-import 'package:e_comerse_app/view/widgets/home/CustomAppbar.dart';
-import 'package:e_comerse_app/view/widgets/home/listCategories.dart';
+import 'package:souq_al_khamis/core/class/handling_data.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:souq_al_khamis/view/widgets/home/CustomCardHome.dart';
+import 'package:souq_al_khamis/view/widgets/home/CustomTitleItmeams.dart';
+import 'package:souq_al_khamis/view/widgets/home/ListIteams.dart';
+import 'package:souq_al_khamis/view/widgets/home/CustomAppbar.dart';
+import 'package:souq_al_khamis/view/widgets/home/listCategories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(HomeControllerImp());
     return Scaffold(
+      backgroundColor: AppColor.thirdColor,
       // ignore: deprecated_member_use
       body: GetBuilder<HomeControllerImp>(
         builder: (controller) => Container(
@@ -59,7 +60,8 @@ class HomePage extends StatelessWidget {
                           Customtitleitmeams(title: '44'.tr),
                           const Listiteams(),
                         ],
-                      ))
+                      ),
+                    )
             ],
           ),
         ),

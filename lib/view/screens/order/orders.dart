@@ -1,4 +1,5 @@
-import 'package:e_comerse_app/core/class/handling_data.dart';
+import 'package:souq_al_khamis/core/class/handling_data.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,7 @@ class OrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     OrderController pageController = Get.put(OrderController());
     return Scaffold(
+      backgroundColor: AppColor.thirdColor,
       appBar: const CustomNavigationAppBar(),
       body: GetBuilder<OrderController>(
         builder: (controller) => HandlingDataView(
