@@ -1,4 +1,3 @@
-import 'package:souq_al_khamis/core/constant/colors.dart';
 import 'package:souq_al_khamis/core/function/alert.dart';
 import 'package:souq_al_khamis/view/widgets/home/CustomButtonAppbar.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +14,15 @@ class HomeBottomNavBar extends StatelessWidget {
     return GetBuilder<BottomNavBarControllerImp>(
       builder: (controller) => Scaffold(
         floatingActionButton: FloatingActionButton(
-          shape: ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(60)),
-          backgroundColor: AppColor.primaryColor,
-          foregroundColor: AppColor.grey200,
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50)), // Rounded FAB
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.white,
           onPressed: () {
             homeBottomNavBar.goToCartPage();
           },
-          child: const Icon(Icons.shopping_basket_outlined),
+          child: const Icon(Icons.shopping_basket_rounded),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: const CustomButtonbar(),

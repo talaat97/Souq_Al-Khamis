@@ -11,19 +11,19 @@ ratingDialog(BuildContext context, String orderId) {
       barrierDismissible: true,
       builder: (context) => RatingDialog(
             initialRating: 2.0,
-            title: const Text(
-              'Gave us Rating',
+            title: Text(
+              'rating_title'.tr,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
 
-            message: const Text(
-              'Tap a star to set your rating. Add more description here if you want.',
+            message: Text(
+              'rating_message'.tr,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 15),
             ),
             // your app's logo?
             image: Image.asset(
@@ -31,12 +31,12 @@ ratingDialog(BuildContext context, String orderId) {
               width: 150,
               height: 150,
             ),
-            submitButtonText: 'Submit',
+            submitButtonText: 'submit'.tr,
             submitButtonTextStyle: const TextStyle(
                 color: AppColor.primaryColor,
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
-            commentHint: 'Set your custom comment hint',
+            commentHint: 'comment_hint'.tr,
             starColor: AppColor.primaryColor,
             onCancelled: () => print('cancelled'),
             onSubmitted: (response) {

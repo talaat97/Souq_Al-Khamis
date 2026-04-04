@@ -1,3 +1,5 @@
+import '../../core/function/parsing_helper.dart';
+
 class IteamsModel {
   String? iteamsId;
   String? iteamsName;
@@ -5,10 +7,10 @@ class IteamsModel {
   String? iteamsDec;
   String? iteamsDecAr;
   String? iteamsImage;
-  String? iteamsCount;
+  int? iteamsCount;
   String? iteamsActive;
-  String? iteamsPrice;
-  String? iteamsDiscount;
+  double? iteamsPrice;
+  double? iteamsDiscount;
   String? iteamsDate;
   String? iteamsCat;
   String? categoriesId;
@@ -17,7 +19,7 @@ class IteamsModel {
   String? categoriesImage;
   String? categoriesDatetime;
   String? favorite;
-  String? iteamPriceDescount;
+  double? iteamPriceDescount;
 
   IteamsModel({
     this.iteamsId,
@@ -42,24 +44,24 @@ class IteamsModel {
   });
 
   IteamsModel.fromJson(Map<String, dynamic> json) {
-    iteamsId = json['iteams_id'];
+    iteamsId = json['iteams_id'].toString();
     iteamsName = json['iteams_name'];
     iteamsNameAr = json['iteams_name_ar'];
     iteamsDec = json['iteams_dec'];
     iteamsDecAr = json['iteams_dec_ar'];
     iteamsImage = json['iteams_image'];
-    iteamsCount = json['iteams_count'];
-    iteamsActive = json['iteams_active'];
-    iteamsPrice = json['iteams_price'];
-    iteamsDiscount = json['iteams_discount'];
+    iteamsCount = parseInt(json['iteams_count']);
+    iteamsActive = json['iteams_active'].toString();
+    iteamsPrice = parseDouble(json['iteams_price']);
+    iteamsDiscount = parseDouble(json['iteams_discount']);
     iteamsDate = json['iteams_date'];
-    iteamsCat = json['iteams_cat'];
-    categoriesId = json['categories_id'];
+    iteamsCat = json['iteams_cat'].toString();
+    categoriesId = json['categories_id'].toString();
     categoriesName = json['categories_name'];
     categoriesNameAr = json['categories_name_ar'];
     categoriesImage = json['categories_image'];
-    categoriesDatetime = json['categories_datetime'];
-    favorite = json['favorite'];
-    iteamPriceDescount = json['iteamPriceDescount'];
+    categoriesDatetime = json['categories_date_time']; // Fixed key if needed, or kept consistent
+    favorite = json['favorite'].toString();
+    iteamPriceDescount = parseDouble(json['iteamPriceDescount']);
   }
 }

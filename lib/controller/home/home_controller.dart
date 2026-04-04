@@ -28,6 +28,7 @@ class HomeControllerImp extends HomeController {
 
   @override
   void onInit() {
+    super.onInit();
     print(
         'user id :==================================================================');
     print(myServices.sharedPreferences.getString('id'));
@@ -36,7 +37,6 @@ class HomeControllerImp extends HomeController {
     NotificationsHelper.firebaseMessaging.subscribeToTopic("users");
     initialData();
     getData();
-    super.onInit();
   }
 
   @override

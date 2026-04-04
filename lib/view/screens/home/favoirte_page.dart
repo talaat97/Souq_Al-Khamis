@@ -12,28 +12,34 @@ class FavoirtePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(FavoriteController());
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(15),
-        children: [
-          GetBuilder<FavoriteController>(
-            builder: (controller) => HandlingDataView(
-              statusRequest: controller.statusRequest,
-              widget: GridView.builder(
-                shrinkWrap: true,
-                itemCount: controller.favoriteIteams.length,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 0.8),
-                itemBuilder: (context, index) {
-                  return CustomThemefavrite(
-                      iteamsModel: FavoriteModel.fromJson(
-                    controller.favoriteIteams[index],
-                  ));
-                },
-              ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(
+        title: Text('My Favorites'.tr, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: GetBuilder<FavoriteController>(
+        builder: (controller) => HandlingDataView(
+          statusRequest: controller.statusRequest,
+          widget: GridView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            physics: const BouncingScrollPhysics(),
+            itemCount: controller.favoriteIteams.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.7,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
             ),
-          )
-        ],
+            itemBuilder: (context, index) {
+              return CustomThemefavrite(
+                  iteamsModel: FavoriteModel.fromJson(
+                controller.favoriteIteams[index],
+              ));
+            },
+          ),
+        ),
       ),
     );
   }

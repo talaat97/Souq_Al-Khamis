@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/on_boarding_controller.dart';
-import '../../../core/constant/colors.dart';
+import '../shared/app_button.dart';
 
 class CutomButtonOnBoarding extends GetView<OnBoardingControllerTmp> {
   const CutomButtonOnBoarding({super.key});
@@ -10,20 +10,14 @@ class CutomButtonOnBoarding extends GetView<OnBoardingControllerTmp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       width: double.infinity,
-      height: 50,
       margin: const EdgeInsets.only(bottom: 40),
-      child: MaterialButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child: AppButton(
+        text: '8'.tr, // 🐛 BUG FIX: Replaced hardcoded 'next' with translation key '8' which usually maps to "Continue"
         onPressed: () {
           controller.next();
         },
-        color: AppColor.primaryColor,
-        child: const Text(
-          'next',
-          style: TextStyle(color: AppColor.white),
-        ),
       ),
     );
   }

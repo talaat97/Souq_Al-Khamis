@@ -84,10 +84,10 @@ class EditAddressController extends GetxController {
   }
 
   @override
-  dispose() {
-    super.dispose();
+  void onClose() {
     name.dispose();
     city.dispose();
     street.dispose();
+    super.onClose();
   }
 }

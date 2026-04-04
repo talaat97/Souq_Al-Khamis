@@ -54,13 +54,45 @@ class AddressEditController extends GetxController {
   }
 
   getCurrentPostion() async {
-    position = await Geolocator.getCurrentPosition();
-    kGooglePlex = CameraPosition(
-      target: LatLng(position!.latitude, position!.longitude),
-      zoom: 12,
-    );
-    addMarker(LatLng(position!.latitude, position!.longitude));
-    statusRequest = StatusRequest.sucess;
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      Get.snackbar('Error', 'Location services are disabled.');
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        Get.snackbar('Error', 'Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      Get.snackbar('Error', 'Location permissions are permanently denied.');
+      return;
+    }
+
+    statusRequest = StatusRequest.loading;
+    update();
+
+    try {
+      position = await Geolocator.getCurrentPosition();
+      kGooglePlex = CameraPosition(
+        target: LatLng(position!.latitude, position!.longitude),
+        zoom: 12,
+      );
+      addMarker(LatLng(position!.latitude, position!.longitude));
+      statusRequest = StatusRequest.sucess;
+    } catch (e) {
+      print('Location Error: $e');
+      statusRequest = StatusRequest.serverExaption;
+    }
     update();
   }
 
@@ -72,15 +104,14 @@ class AddressEditController extends GetxController {
   void onInit() {
     getCurrentPostion();
     googleMapController = Completer<GoogleMapController>();
-
     super.onInit();
   }
 
   @override
-  dispose() {
-    super.dispose();
+  void onClose() {
     name.dispose();
     city.dispose();
     street.dispose();
+    super.onClose();
   }
 }

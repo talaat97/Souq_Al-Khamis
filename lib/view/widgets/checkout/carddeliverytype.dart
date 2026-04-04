@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constant/colors.dart';
-
 class CardDeliveryTypeCheckout extends StatelessWidget {
   final String imagename;
   final String title;
@@ -15,25 +13,43 @@ class CardDeliveryTypeCheckout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
       height: 120,
       width: 120,
       decoration: BoxDecoration(
-          color: active ? AppColor.secondColor : null,
-          border: Border.all(color: AppColor.secondColor)),
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Image.asset(
-          imagename,
-          width: 60,
-          color: active ? Colors.white : null,
+        color: active ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: active ? Theme.of(context).primaryColor : Colors.grey.shade300,
+          width: 1.5,
         ),
-        Text(
-          title,
-          style: TextStyle(
-              color: active ? Colors.white : AppColor.secondColor,
-              fontWeight: FontWeight.bold),
-        )
-      ]),
+        boxShadow: active ? [
+          BoxShadow(
+            color: Theme.of(context).primaryColor.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          )
+        ] : null,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imagename,
+            width: 60,
+            color: active ? Colors.white : Theme.of(context).primaryColor,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: active ? Colors.white : Colors.black87,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

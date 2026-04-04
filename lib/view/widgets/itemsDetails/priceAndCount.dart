@@ -1,90 +1,99 @@
 import 'package:souq_al_khamis/core/class/status_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/items/itemDtailsController.dart';
-import '../../../core/constant/colors.dart';
 
 class PriceAndCountItems extends StatelessWidget {
   final int count;
   final String price;
   final String discountPrice;
-  final void Function()? addCount;
-  final void Function()? removeCount;
-  const PriceAndCountItems(
-      {super.key,
-      required this.count,
-      required this.price,
-      required this.addCount,
-      required this.removeCount,
-      required this.discountPrice});
+  final VoidCallback? addCount;
+  final VoidCallback? removeCount;
+
+  const PriceAndCountItems({
+    super.key,
+    required this.count,
+    required this.price,
+    required this.addCount,
+    required this.removeCount,
+    required this.discountPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
+        // Stepper
+        Container(
+          height: 48,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor.withOpacity(0.05),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.1)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildStepperBtn(context, Icons.remove, removeCount),
+              SizedBox(
+                width: 40,
+                child: GetBuilder<ItemsDetailControllerImp>(
+                  builder: (controller) => controller.statusRequest == StatusRequest.sucess
+                      ? Text(
+                          '$count',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      : const Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))),
+                ),
+              ),
+              _buildStepperBtn(context, Icons.add, addCount),
+            ],
+          ),
+        ),
+        
+        // Price
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: addCount,
-            ),
-            Container(
-              height: 45,
-              width: 40,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColor.secondColor)),
-              child: GetBuilder<ItemsDetailControllerImp>(
-                  builder: (controller) =>
-                      controller.statusRequest == StatusRequest.sucess
-                          ? Text(
-                              '$count',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  height: 2),
-                              textAlign: TextAlign.center,
-                            )
-                          : const Center(child: CircularProgressIndicator())),
-            ),
-            IconButton(
-              icon: const Icon(Icons.remove),
-              onPressed: removeCount,
+            if (discountPrice != price)
+              Text(
+                '$discountPrice \$',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.grey.shade500,
+                  decoration: TextDecoration.lineThrough,
+                  height: 1.0,
+                ),
+              ),
+            Text(
+              '$price \$',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+                height: 1.2,
+              ),
             ),
           ],
         ),
-        discountPrice == price
-            ? Text(
-                '$price\$',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontSize: 40,
-                      color: AppColor.secondColor,
-                    ),
-              )
-            : Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(right: 70),
-                    child: Text(
-                      discountPrice,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontSize: 30,
-                          color: AppColor.secondColor,
-                          decoration: TextDecoration.lineThrough),
-                    ),
-                  ),
-                  Text(
-                    '$price\$',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(fontSize: 40, color: AppColor.secondColor),
-                  ),
-                ],
-              )
       ],
+    );
+  }
+
+  Widget _buildStepperBtn(BuildContext context, IconData icon, VoidCallback? onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Icon(
+          icon,
+          size: 20,
+          color: Theme.of(context).primaryColor,
+        ),
+      ),
     );
   }
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constant/colors.dart';
-
 class CustomAppbar extends StatelessWidget {
   final String title;
-
   final void Function()? onPreesedFavorite;
   final void Function()? onPreesedNotfication;
   final void Function()? onPreesedSearch;
   final void Function(String)? onChanged;
   final TextEditingController? myController;
+
   const CustomAppbar({
     super.key,
     required this.title,
@@ -22,54 +20,52 @@ class CustomAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 10),
-      child: Row(children: [
-        Expanded(
-          child: TextFormField(
-            controller: myController,
-            onChanged: onChanged,
-            decoration: InputDecoration(
-                prefixIcon: IconButton(
-                    onPressed: onPreesedSearch, icon: const Icon(Icons.search)),
-                hintText: title,
-                hintStyle: const TextStyle(fontSize: 18),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              controller: myController,
+              onChanged: onChanged,
+              decoration: InputDecoration(
                 filled: true,
-                fillColor: AppColor.grey200),
+                fillColor: Theme.of(context).cardColor,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                prefixIcon: IconButton(
+                  onPressed: onPreesedSearch, 
+                  icon: const Icon(Icons.search),
+                  color: Colors.grey.shade600,
+                ),
+                hintText: title,
+                hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade400),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
           ),
-        ),
-        const SizedBox(width: 10),
-        Container(
-          height: 70,
-          width: 60,
-          decoration: BoxDecoration(
-              color: AppColor.grey200, borderRadius: BorderRadius.circular(15)),
-          child: IconButton(
-              onPressed: onPreesedFavorite,
-              icon: Icon(
-                Icons.favorite_border_outlined,
-                size: 30,
-                color: AppColor.grey600,
-              )),
-        ),
-        const SizedBox(width: 10),
-        Container(
-          height: 70,
-          width: 60,
-          decoration: BoxDecoration(
-              color: AppColor.grey200, borderRadius: BorderRadius.circular(15)),
-          child: IconButton(
-              onPressed: onPreesedNotfication,
-              icon: Icon(
-                Icons.notifications_active_outlined,
-                size: 30,
-                color: AppColor.grey600,
-              )),
-        ),
-      ]),
+          const SizedBox(width: 12),
+          _buildActionButton(context, Icons.favorite_border_rounded, onPreesedFavorite),
+          const SizedBox(width: 12),
+          _buildActionButton(context, Icons.notifications_none_rounded, onPreesedNotfication),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButton(BuildContext context, IconData icon, VoidCallback? onPressed) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: IconButton(
+        onPressed: onPressed,
+        icon: Icon(icon, color: Colors.grey.shade700),
+        splashRadius: 24,
+      ),
     );
   }
 }

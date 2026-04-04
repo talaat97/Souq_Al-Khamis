@@ -1,8 +1,7 @@
 import 'package:souq_al_khamis/controller/cart/cartContoller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../core/constant/colors.dart';
+import '../shared/app_button.dart';
 
 class CuttomButtonOfCart extends StatelessWidget {
   final double order;
@@ -12,6 +11,7 @@ class CuttomButtonOfCart extends StatelessWidget {
   final void Function()? onPressed;
   final TextEditingController controllerCoupon;
   final void Function()? applyCoupon;
+
   const CuttomButtonOfCart({
     super.key,
     required this.order,
@@ -26,193 +26,139 @@ class CuttomButtonOfCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CartController>(
-      builder: (controller) => controller.hideBill
-          ? IconButton(
-              icon: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: AppColor.thirdColor,
-                  ),
-                  padding: const EdgeInsets.all(15),
-                  child: const Icon(
-                    Icons.keyboard_arrow_up,
-                    color: AppColor.black,
-                    size: 30,
-                  )),
-              onPressed: () {
-                controller.hideBill = !controller.hideBill;
-                controller.update();
-              },
-            )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: AppColor.thirdColor,
-                      ),
-                      padding: const EdgeInsets.all(15),
-                      child: const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: AppColor.black,
-                        size: 15,
-                      )),
-                  onPressed: () {
-                    controller.hideBill = !controller.hideBill;
-                    controller.update();
-                  },
-                ),
-                controller.couponName == null
-                    ? Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 2,
-                                child: TextFormField(
-                                  controller: controllerCoupon,
-                                  cursorColor: AppColor.primaryColor,
-                                  decoration: const InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 5),
-                                      isDense: true,
-                                      hintText: 'Enter Coupon',
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10))),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          borderSide: BorderSide(
-                                              color: AppColor.primaryColor))),
-                                )),
-                            const SizedBox(width: 5),
-                            Expanded(
-                              child: MaterialButton(
-                                height: 50,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                color: AppColor.primaryColor,
-                                textColor: AppColor.white,
-                                onPressed: applyCoupon,
-                                child: const Text('Coupon'),
-                              ),
-                            )
-                          ],
+      builder: (controller) => Container(
+        padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 24),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              offset: const Offset(0, -4),
+              blurRadius: 16,
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Coupon Field
+            if (controller.couponName == null)
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: controllerCoupon,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Coupon Code'.tr,
+                        hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                      )
-                    : Text(
-                        ' Code ${controller.couponName}',
-                        style: const TextStyle(
-                            color: AppColor.primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
                       ),
-                Container(
-                  margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: AppColor.primaryColor,
-                      borderRadius: BorderRadius.circular(15),
-                      border:
-                          Border.all(color: AppColor.primaryColor, width: 1)),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              'Order',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('$order',
-                                style: Theme.of(context).textTheme.bodyLarge),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              'discount',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('$coupon  %',
-                                style: Theme.of(context).textTheme.bodyLarge),
-                          )
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              'shipping',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('$shipping \$',
-                                style: Theme.of(context).textTheme.bodyLarge),
-                          )
-                        ],
-                      ),
-                      const Divider(height: 3, color: Colors.black),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              'Total price',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                      fontSize: 25,
-                                      color: AppColor.secondColor),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text('$totlaPrice  \$',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                        fontSize: 25,
-                                        color: AppColor.secondColor)),
-                          )
-                        ],
-                      ),
-                      MaterialButton(
-                        minWidth: double.infinity,
-                        height: 50,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        color: AppColor.primaryColor,
-                        textColor: AppColor.white,
-                        onPressed: onPressed,
-                        child: const Text('book order'),
-                      ),
-                    ],
+                    ),
                   ),
-                )
+                  const SizedBox(width: 12),
+                  ElevatedButton(
+                    onPressed: applyCoupon,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                    ),
+                    child: Text('Apply'.tr, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                ],
+              )
+            else
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                decoration: BoxDecoration(
+                  color: Colors.green.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.green.withOpacity(0.3)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Code: ${controller.couponName} applied',
+                      style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            
+            const SizedBox(height: 24),
+            
+            // Breakdown
+            _buildPriceRow(context, 'Subtotal'.tr, '$order \$'),
+            const SizedBox(height: 8),
+            _buildPriceRow(context, 'Discount'.tr, '-$coupon %', color: Colors.green),
+            const SizedBox(height: 8),
+            _buildPriceRow(context, 'Shipping'.tr, '$shipping \$'),
+            
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Divider(height: 1),
+            ),
+            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total'.tr,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '$totlaPrice \$',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
               ],
             ),
+            
+            const SizedBox(height: 24),
+            AppButton(
+              text: 'Checkout'.tr,
+              onPressed: onPressed ?? () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPriceRow(BuildContext context, String label, String value, {Color? color}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: Colors.grey.shade600,
+          ),
+        ),
+        Text(
+          value,
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: color ?? Theme.of(context).textTheme.bodyLarge?.color,
+          ),
+        ),
+      ],
     );
   }
 }

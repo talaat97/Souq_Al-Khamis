@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:souq_al_khamis/core/constant/colors.dart';
 import 'package:souq_al_khamis/core/constant/image_assets.dart';
 import 'package:souq_al_khamis/core/function/translate_database.dart';
 import 'package:souq_al_khamis/data/model/offer_model.dart';
@@ -24,104 +23,134 @@ class CustomThemeOffer extends StatelessWidget {
       onTap: () {
         controller.goToIteamsDetails(offerModel);
       },
+      borderRadius: BorderRadius.circular(16),
       child: Card(
-        color: AppColor.grey200,
-        elevation: 5,
+        color: Theme.of(context).cardColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: Colors.grey.shade200),
+        ),
+        clipBehavior: Clip.antiAlias,
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Hero(
-                    tag: '${offerModel.iteamsId}',
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          "${Applink.iteamsLink}/${offerModel.iteamsImage}",
-                      height: 150,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 180,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade50,
+                  ),
+                  child: Center(
+                    child: Hero(
+                      tag: '${offerModel.iteamsId}',
+                      child: CachedNetworkImage(
+                        imageUrl: "${Applink.iteamsLink}/${offerModel.iteamsImage}",
+                        height: 140,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      tr(offerModel.iteamsName, offerModel.iteamsNameAr),
-                      style: const TextStyle(
-                          fontSize: 25,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "category: ${offerModel.categoriesName!}|Offer: ${offerModel.iteamsDiscount}%",
-                      style: const TextStyle(
-                          fontSize: 20, color: AppColor.secondColor),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      tr(offerModel.iteamsDec, offerModel.iteamsDecAr),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Rating:',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: AppColor.primaryColor),
+                          Expanded(
+                            child: Text(
+                              tr(offerModel.iteamsName, offerModel.iteamsNameAr),
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                          ...List.generate(
-                            5,
-                            (index) =>
-                                index < num.parse(offerModel.ratingAvr ?? '1')
-                                    ? const Icon(
-                                        Icons.star_border_outlined,
-                                        color: AppColor.primaryColor,
-                                        size: 27,
-                                      )
-                                    : const Icon(Icons.star_border,
-                                        color: AppColor.black, size: 27),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '${offerModel.iteamsDiscount}% OFF'.tr,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
+                      const SizedBox(height: 4),
                       Text(
-                        '${offerModel.iteamsPrice}' '\$',
-                        style: const TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: AppColor.primaryColor),
+                        'Category: ${offerModel.categoriesName}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
                       ),
+                      const SizedBox(height: 8),
                       Text(
-                        '${offerModel.iteamPriceDescount}' '\$',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: AppColor.primaryColor),
+                        tr(offerModel.iteamsDec, offerModel.iteamsDecAr),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(height: 1.4, color: Colors.grey.shade700),
                       ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Row(
+                            children: [
+                              ...List.generate(
+                                5,
+                                (index) => Icon(
+                                  index < num.parse(offerModel.ratingAvr ?? '1')
+                                      ? Icons.star_rounded
+                                      : Icons.star_outline_rounded,
+                                  color: Colors.amber.shade400,
+                                  size: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                '${offerModel.iteamsPrice}\$',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: Colors.grey.shade500,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '${offerModel.iteamPriceDescount}\$',
+                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
-            Positioned(
-              top: 0,
+            PositionedDirectional(
+              top: 16,
+              start: 16,
               child: Image.asset(
                 AppImageAsset.saleImgae,
-                height: 80,
-                width: 80,
+                height: 50,
+                width: 50,
               ),
             )
           ],

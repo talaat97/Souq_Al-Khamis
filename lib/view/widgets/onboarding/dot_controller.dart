@@ -21,7 +21,7 @@ class CutomControllerOnBoarding extends StatelessWidget {
                 duration: const Duration(milliseconds: 500),
                 width: controller.currentIndex == index ? 20 : 6,
                 height: 6,
-                margin: const EdgeInsets.only(left: 5),
+                margin: const EdgeInsetsDirectional.only(start: 5),
                 decoration: BoxDecoration(
                     color: AppColor.primaryColor,
                     borderRadius: BorderRadius.circular(10)),

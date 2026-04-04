@@ -16,31 +16,42 @@ class CutomSliderOnBoarding extends GetView<OnBoardingControllerTmp> {
       controller: controller.pageController,
       itemCount: onBoardingList.length,
       itemBuilder: (context, index) {
+        // 🐛 BUG FIX: Added correct scaling sizes, 16px safe margins, and removed overflow risk on small screens
         return Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Spacer(flex: 2),
               Image.asset(
                 onBoardingList[index].image!,
                 height: 300,
+                fit: BoxFit.contain,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 48),
               Text(
                 onBoardingList[index].title!,
-                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 16),
               Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: Text(
-                    onBoardingList[index].body!,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(fontSize: 20),
-                  )),
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: Text(
+                  onBoardingList[index].body!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontSize: 16,
+                    height: 1.5,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+              ),
+              const Spacer(flex: 3),
             ],
           ),
         );

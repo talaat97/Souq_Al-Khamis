@@ -14,53 +14,60 @@ class CartPage extends StatelessWidget {
     var cartContoller = Get.put(CartController());
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('My Cart'),
+        title: Text(
+          'My Cart'.tr,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: GetBuilder<CartController>(
         builder: (controller) => Scaffold(
-          body: ListView(
+          backgroundColor: Colors.transparent,
+          body: Column(
             children: [
               CustomDivider(
-                  message:
-                      'you add ${cartContoller.numIteamsInCart} items to cart'),
-              const SizedBox(height: 10),
-              cartContoller.cartIteams.isEmpty
-                  ? const Center(
-                      child: Text('no data in cart'),
+                message: 'You have added ${cartContoller.numIteamsInCart} items to your cart'.tr,
+              ),
+              Expanded(
+                child: cartContoller.cartIteams.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.shopping_cart_outlined, size: 100, color: Colors.grey.shade300),
+                          const SizedBox(height: 16),
+                          Text('Your cart is empty'.tr, style: TextStyle(color: Colors.grey.shade500, fontSize: 18)),
+                        ],
+                      ),
                     )
-                  : Column(
-                      children: [
-                        ...List.generate(
-                          cartContoller.cartIteams.length,
-                          (index) => CustomThemeCart(
-                            name: tr(cartContoller.cartIteams[index].iteamsName,
-                                cartContoller.cartIteams[index].iteamsNameAr),
-                            price:
-                                '${cartContoller.cartIteams[index].iteamsPrice}',
-                            count:
-                                '${cartContoller.cartIteams[index].iteamsCount}',
-                            urlImage:
-                                cartContoller.cartIteams[index].iteamsImage!,
-                            onAdd: () {
-                              cartContoller.addToCart(
-                                  cartContoller.cartIteams[index].iteamsId!);
-                            },
-                            onRemove: () {
-                              if (cartContoller.cartIteams.isNotEmpty) {
-                                cartContoller.removeFromCart(
-                                    cartContoller.cartIteams[index].iteamsId!);
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    )
+                  : ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.only(top: 8, bottom: 24),
+                      itemCount: cartContoller.cartIteams.length,
+                      itemBuilder: (context, index) => CustomThemeCart(
+                        name: tr(cartContoller.cartIteams[index].iteamsName,
+                            cartContoller.cartIteams[index].iteamsNameAr),
+                        price: '${cartContoller.cartIteams[index].iteamsPrice}',
+                        count: '${cartContoller.cartIteams[index].iteamsCount}',
+                        urlImage: cartContoller.cartIteams[index].iteamsImage!,
+                        onAdd: () {
+                          cartContoller.addToCart(cartContoller.cartIteams[index].iteamsId!);
+                        },
+                        onRemove: () {
+                          if (cartContoller.cartIteams.isNotEmpty) {
+                            cartContoller.removeFromCart(cartContoller.cartIteams[index].iteamsId!);
+                          }
+                        },
+                      ),
+                    ),
+              ),
             ],
           ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: CuttomButtonOfCart(
+          bottomNavigationBar: controller.cartIteams.isEmpty ? null : CuttomButtonOfCart(
             order: cartContoller.orderPrice,
             shipping: cartContoller.shipping,
             totlaPrice: cartContoller.orderTotalPrice,

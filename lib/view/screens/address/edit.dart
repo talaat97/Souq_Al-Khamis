@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../controller/address/editController.dart';
 import '../../../core/function/valild.dart';
-import '../../widgets/address/CustombuttonAddress.dart';
+import '../../widgets/shared/app_button.dart';
 import '../../widgets/auth/text_field.dart';
 
 class AddressEdit extends StatelessWidget {
@@ -14,8 +14,13 @@ class AddressEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     EditAddressController pageController = Get.put(EditAddressController());
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('Edit Address'),
+        title: Text('Edit Address'.tr,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: Column(
         children: [
@@ -39,73 +44,90 @@ class AddressEdit extends StatelessWidget {
                           },
                         )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: CustombuttonAddress(
-                        text: 'Contuine',
-                        onTap: () {
+                  PositionedDirectional(
+                    bottom: 24,
+                    start: 24,
+                    end: 24,
+                    child: AppButton(
+                        text: 'Continue'.tr,
+                        onPressed: () {
                           Get.bottomSheet(
-                            backgroundColor: Colors.white,
-                            Form(
-                              key: pageController.addreessKey,
-                              child: ListView(
-                                padding: const EdgeInsets.all(15),
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'details',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).scaffoldBackgroundColor,
+                                borderRadius: const BorderRadius.vertical(top: Radius.circular(24))
+                              ),
+                              child: Form(
+                                key: pageController.addreessKey,
+                                child: ListView(
+                                  padding: const EdgeInsets.all(24),
+                                  children: [
+                                    Center(
+                                      child: Container(
+                                        width: 40,
+                                        height: 4,
+                                        margin: const EdgeInsets.only(bottom: 20),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.shade300,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 40),
-                                  CustomTextField(
-                                      hintText: 'enter name of addrees',
-                                      labelText: 'Name',
-                                      myController: pageController.name,
-                                      myIcon: Icons.location_pin,
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Address Details'.tr,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 32),
+                                    CustomTextField(
+                                        hintText: 'Enter name of address'.tr,
+                                        labelText: 'Name'.tr,
+                                        myController: pageController.name,
+                                        myIcon: Icons.home_work_outlined,
+                                        valid: (val) {
+                                          return checkVaild(
+                                              val!, 3, 100, '');
+                                        }),
+                                    const SizedBox(height: 16),
+                                    CustomTextField(
+                                      hintText: 'Enter city'.tr,
+                                      labelText: 'City'.tr,
+                                      myController: pageController.city,
+                                      myIcon: Icons.location_city_outlined,
                                       valid: (val) {
                                         return checkVaild(
-                                            val!, 5, 100, 'password');
-                                      }),
-                                  const SizedBox(height: 20),
-                                  CustomTextField(
-                                    hintText: 'enter city ',
-                                    labelText: 'City',
-                                    myController: pageController.city,
-                                    myIcon: Icons.location_city,
-                                    valid: (val) {
-                                      return checkVaild(
-                                          val!, 5, 100, 'password');
-                                    },
-                                  ),
-                                  const SizedBox(height: 20),
-                                  CustomTextField(
-                                    hintText: 'enter street',
-                                    labelText: 'Street',
-                                    myController: pageController.street,
-                                    myIcon: Icons.store_mall_directory_outlined,
-                                    valid: (val) {
-                                      return checkVaild(
-                                          val!, 5, 100, 'password');
-                                    },
-                                  ),
-                                  const SizedBox(height: 20),
-                                  CustombuttonAddress(
-                                    text: 'Add',
-                                    onTap: () {
-                                      pageController.editAddress();
-                                    },
-                                  ),
-                                ],
+                                            val!, 3, 100, '');
+                                      },
+                                    ),
+                                    const SizedBox(height: 16),
+                                    CustomTextField(
+                                      hintText: 'Enter street'.tr,
+                                      labelText: 'Street'.tr,
+                                      myController: pageController.street,
+                                      myIcon: Icons.add_road_outlined,
+                                      valid: (val) {
+                                        return checkVaild(
+                                            val!, 3, 100, '');
+                                      },
+                                    ),
+                                    const SizedBox(height: 32),
+                                    AppButton(
+                                      text: 'Save Address'.tr,
+                                      onPressed: () {
+                                        pageController.editAddress();
+                                      },
+                                    ),
+                                    const SizedBox(height: 16),
+                                  ],
+                                ),
                               ),
                             ),
-                            barrierColor:
-                                Colors.black.withOpacity(0.5), // Optional
                             isDismissible: true,
-                            enableDrag: false,
+                            enableDrag: true,
                           );
                         }),
                   ),

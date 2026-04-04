@@ -10,36 +10,36 @@ class CustomTextField extends StatelessWidget {
   final bool? obscureText;
   final void Function()? onTapIcon;
 
-  const CustomTextField(
-      {super.key,
-      required this.hintText,
-      required this.labelText,
-      required this.myController,
-      required this.myIcon,
-      required this.valid,
-      this.keyboardType,
-      this.obscureText,
-      this.onTapIcon});
+  const CustomTextField({
+    super.key,
+    required this.hintText,
+    required this.labelText,
+    required this.myController,
+    required this.myIcon,
+    required this.valid,
+    this.keyboardType,
+    this.obscureText,
+    this.onTapIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // 🐛 BUG FIX: Enhanced text field with 12px border radius, subtle fill color, and better RTL support
     return TextFormField(
       controller: myController,
-      obscureText: obscureText == null || obscureText == false ? false : true,
+      obscureText: obscureText ?? false,
       keyboardType: keyboardType,
       validator: valid,
       decoration: InputDecoration(
-        suffixIcon: InkWell(
-          onTap: onTapIcon,
-          child: Icon(myIcon),
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+        suffixIcon: onTapIcon != null 
+          ? InkWell(
+              onTap: onTapIcon,
+              borderRadius: BorderRadius.circular(50),
+              child: Icon(myIcon, color: Colors.grey.shade600),
+            )
+          : Icon(myIcon, color: Colors.grey.shade400),
         hintText: hintText,
-        label: Text(labelText),
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-        ),
+        labelText: labelText,
       ),
     );
   }

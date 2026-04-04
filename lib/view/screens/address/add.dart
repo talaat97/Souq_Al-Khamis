@@ -13,8 +13,13 @@ class AddressAdd extends StatelessWidget {
   Widget build(BuildContext context) {
     AddressEditController pageController = Get.put(AddressEditController());
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('New address'),
+        title: Text('New Address'.tr,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: GetBuilder<AddressEditController>(
         builder: (controller) => HandlingDataView(

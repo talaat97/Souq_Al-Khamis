@@ -23,6 +23,7 @@ class ItemsPage extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: GetBuilder<ItemsControllerTmp>(
             builder: (controller) => ListView(
+              physics: const BouncingScrollPhysics(),
               children: [
                 CustomAppbar(
                   myController: controller.searchContoller!,
@@ -50,7 +51,10 @@ class ItemsPage extends StatelessWidget {
                               physics: const NeverScrollableScrollPhysics(),
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2, childAspectRatio: 0.8),
+                                      crossAxisCount: 2, 
+                                      childAspectRatio: 0.65,
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 8),
                               itemBuilder: (context, index) {
                                 favController.isFavirote[controller.items[index]
                                         ['iteams_id']] =

@@ -27,9 +27,10 @@ class HomePage extends StatelessWidget {
         builder: (controller) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
               CustomAppbar(
-                myController: controller.searchContoller!,
+                myController: controller.searchContoller,
                 onChanged: (val) {
                   controller.isSerachEmpty(val);
                 },
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
                   controller.goToNotifcationPage();
                 },
                 onPreesedSearch: () {
-                  if (controller.searchContoller!.text.isNotEmpty) {
+                  if ((controller.searchContoller?.text ?? '').isNotEmpty) {
                     controller.goSearch();
                   }
                 },
@@ -52,7 +53,7 @@ class HomePage extends StatelessWidget {
                       statusRequest: controller.statusRequest,
                       widget: Column(
                         children: [
-                          Customcardhome(title: '40'.tr, body: '41'.tr),
+                          CustomCardHome(title: '40'.tr, body: '41'.tr),
                           Customtitleitmeams(title: '42'.tr),
                           const Listcategories(),
                           Customtitleitmeams(title: '43'.tr),

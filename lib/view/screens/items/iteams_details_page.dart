@@ -1,4 +1,3 @@
-import 'package:souq_al_khamis/core/constant/colors.dart';
 import 'package:souq_al_khamis/core/function/translate_database.dart';
 import 'package:souq_al_khamis/view/widgets/itemsDetails/priceAndCount.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import '../../../controller/cart/cartContoller.dart';
 import '../../../controller/items/itemDtailsController.dart';
 import '../../widgets/itemsDetails/SubListItems.dart';
 import '../../widgets/itemsDetails/itemPictureStack.dart';
+import '../../widgets/shared/app_button.dart';
 
 class ItemsDetailsPage extends StatelessWidget {
   const ItemsDetailsPage({super.key});
@@ -18,12 +18,15 @@ class ItemsDetailsPage extends StatelessWidget {
         Get.put(ItemsDetailControllerImp());
     CartController cartContoller = Get.put(CartController());
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: ListView(
+        padding: EdgeInsets.zero,
+        physics: const BouncingScrollPhysics(),
         children: [
           const TopProductPageDetails(),
           const SizedBox(height: 70),
           Container(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -32,17 +35,18 @@ class ItemsDetailsPage extends StatelessWidget {
                       itemsDetailController.iteamsModel.iteamsNameAr),
                   style: Theme.of(context)
                       .textTheme
-                      .titleLarge!
-                      .copyWith(fontSize: 60),
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 16),
                 GetBuilder<ItemsDetailControllerImp>(
                   builder: (controller) => PriceAndCountItems(
                     discountPrice:
-                        itemsDetailController.iteamsModel.iteamsPrice!,
+                        itemsDetailController.iteamsModel.iteamsPrice!.toString(),
                     count: itemsDetailController.countItemInCart,
                     price:
-                        itemsDetailController.iteamsModel.iteamPriceDescount!,
+                        itemsDetailController.iteamsModel.iteamPriceDescount!
+                            .toString(),
                     addCount: () async {
                       itemsDetailController.countItemInCart++;
                       await cartContoller.addToCart(
@@ -57,47 +61,52 @@ class ItemsDetailsPage extends StatelessWidget {
                         itemsDetailController.update();
                       } else {
                         Get.rawSnackbar(
-                            title: 'OPPS!',
-                            message: 'this item isaready zero',
+                            title: 'Oops!',
+                            message: 'This item count is already zero',
                             duration: const Duration(seconds: 2));
                       }
                     },
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 24),
                 Text(
-                  textAlign: TextAlign.center,
-                  "${tr(itemsDetailController.iteamsModel.iteamsDec, itemsDetailController.iteamsModel.iteamsDecAr)}Anim veniam incididunt nisi nisi et esse mollit consectetur deserunt labore.",
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  "${tr(itemsDetailController.iteamsModel.iteamsDec, itemsDetailController.iteamsModel.iteamsDecAr)} Anim veniam incididunt nisi nisi et esse mollit consectetur deserunt labore.",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.grey.shade600,
+                    height: 1.6,
+                  ),
                 ),
-                const Divider(
-                  color: AppColor.primaryColor,
-                  thickness: 2,
-                  indent: 70,
-                  endIndent: 70,
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: Divider(height: 1),
                 ),
                 Text(
-                  '49'.tr,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  'Colors & Options'.tr, // Generalizing "49" text which makes no sense structurally
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 const SubitemsList(),
+                const SizedBox(height: 24),
               ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-            color: AppColor.secondColor,
-            borderRadius: BorderRadius.circular(20)),
-        height: 50,
-        child: TextButton(
-          child: const Text(
-            'Go to cart',
-            style: TextStyle(color: AppColor.white),
-          ),
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 16,
+              offset: const Offset(0, -4),
+            )
+          ]
+        ),
+        child: AppButton(
+          text: 'Go to cart'.tr,
           onPressed: () {
             itemsDetailController.goToCart();
           },

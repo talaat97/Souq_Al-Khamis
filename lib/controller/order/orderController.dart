@@ -1,10 +1,7 @@
-import 'package:souq_al_khamis/core/constant/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:souq_al_khamis/core/constant/routs_page.dart';
 import 'package:souq_al_khamis/core/function/handling_data_controller.dart';
 import 'package:souq_al_khamis/data/model/order_model.dart';
-import 'package:souq_al_khamis/view/widgets/order/archiveThemeCard.dart';
-import 'package:souq_al_khamis/view/widgets/order/pendingThemeCard.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/class/status_request.dart';
@@ -15,64 +12,55 @@ class OrderController extends GetxController {
   OrdersData ordersData = OrdersData(Get.find());
   StatusRequest statusRequest = StatusRequest.loading;
   MyServices myServices = Get.find();
+
   List<OrderModel> ordersPending = [];
   List<OrderModel> ordersArchive = [];
   String namePage = 'pending';
-  printOrderType(String val) {
-    return val == '0' ? 'Delivery' : 'Receive';
-  }
 
-  printOrrderPaymentMethod(String val) {
-    return val == '0' ? 'cash' : 'payment cart';
-  }
+  // ─── Formatters ───────────────────────────────────────────
+  String printOrderType(String val) =>
+      val == '0' ? 'delivery_standard'.tr : 'receive_standard'.tr;
 
-  printDeliverPriceOrder(String val) {
-    return val == '0' ? 'no delivey price' : val;
-  }
+  String printOrderPaymentMethod(String val) =>
+      val == '0' ? 'cash_on_delivery'.tr : 'payment_card'.tr;
 
-  printOrderStatus(String val) {
-    if (val == '1') {
-      return 'Wait approve';
-    }
-    if (val == '2') {
-      return 'Preparing';
-    }
-    if (val == '3') {
-      return 'On way';
-    }
-    if (val == '4') {
-      return 'Archived';
+  String printDeliverPriceOrder(String val) =>
+      val == '0' ? 'no_delivery_price'.tr : val;
+
+  String printOrderStatus(String val) {
+    switch (val) {
+      case '1': return 'status_wait_approve'.tr;
+      case '2': return 'status_preparing'.tr;
+      case '3': return 'status_on_way'.tr;
+      case '4': return 'status_archived'.tr;
+      default:  return '';
     }
   }
 
-  colorCard(String val) {
-    if (val == '1') {
-      return const Color.fromARGB(255, 255, 196, 3);
-    }
-    if (val == '2') {
-      return const Color.fromARGB(150, 255, 196, 3);
-    }
-    if (val == '3') {
-      return Colors.green;
-    }
-    if (val == '4') {
-      return Colors.grey;
+  Color colorCard(String val) {
+    switch (val) {
+      case '1': return const Color.fromARGB(255, 255, 196, 3);
+      case '2': return const Color.fromARGB(150, 255, 196, 3);
+      case '3': return const Color.fromARGB(255, 76, 175, 80);
+      default:  return const Color.fromARGB(255, 158, 158, 158);
     }
   }
 
-  getPendingOrders() async {
+  // ─── API Calls ────────────────────────────────────────────
+  Future<void> getPendingOrders() async {
     ordersPending.clear();
     statusRequest = StatusRequest.loading;
     update();
+
     var response = await ordersData.getPendingOrders(
       myServices.sharedPreferences.getString('id').toString(),
     );
+
     statusRequest = handlingData(response);
-    if (StatusRequest.sucess == statusRequest) {
+    if (statusRequest == StatusRequest.sucess) {
       if (response['status'] == 'success') {
         List responseData = response['data'];
         ordersPending.addAll(responseData.map((e) => OrderModel.fromJson(e)));
-        statusRequest = StatusRequest.sucess;
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -80,19 +68,20 @@ class OrderController extends GetxController {
     update();
   }
 
-  getArchiveOrders() async {
-    ordersPending.clear();
+  Future<void> getArchiveOrders() async {
+    ordersArchive.clear();
     statusRequest = StatusRequest.loading;
     update();
+
     var response = await ordersData.getArchiveOrders(
       myServices.sharedPreferences.getString('id').toString(),
     );
+
     statusRequest = handlingData(response);
-    if (StatusRequest.sucess == statusRequest) {
+    if (statusRequest == StatusRequest.sucess) {
       if (response['status'] == 'success') {
         List responseData = response['data'];
         ordersArchive.addAll(responseData.map((e) => OrderModel.fromJson(e)));
-        statusRequest = StatusRequest.sucess;
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -100,25 +89,21 @@ class OrderController extends GetxController {
     update();
   }
 
-  refreshOrders() {
-    getPendingOrders();
-    getArchiveOrders();
+  Future<void> refreshOrders() async {
+    await getPendingOrders();
+    await getArchiveOrders();
   }
 
-  goToOrderDetails(OrderModel orderModel) {
-    Get.toNamed(AppRoute.orderDeitails, arguments: {
-      'orderModel': orderModel,
-    });
-  }
-
-  deleteOrder(OrderModel orderModel) async {
+  Future<void> deleteOrder(OrderModel orderModel) async {
     statusRequest = StatusRequest.loading;
     update();
+
     var response = await ordersData.deleteOrder(
       orderModel.orderId.toString(),
     );
+
     statusRequest = handlingData(response);
-    if (StatusRequest.sucess == statusRequest) {
+    if (statusRequest == StatusRequest.sucess) {
       if (response['status'] == 'success') {
         ordersPending.remove(orderModel);
         statusRequest = StatusRequest.sucess;
@@ -129,79 +114,59 @@ class OrderController extends GetxController {
     update();
   }
 
-  alertToDelete(OrderModel orderModel) {
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Delete order'),
-        content:
-            Text('are you suer deleting ${orderModel.orderId} this order?'),
-        actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-                foregroundColor: AppColor.white,
-                backgroundColor: AppColor.primaryColor),
-            onPressed: () {
-              deleteOrder(orderModel);
-              Get.back();
-            },
-            child: const Text("Yes"),
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              foregroundColor: AppColor.black,
-            ),
-            child: const Text("cancel"),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  pendingOrders() {
-    return ListView.builder(
-        itemCount: ordersPending.length,
-        itemBuilder: (context, index) =>
-            PendingThemeCard(orderModel: ordersPending[index]));
-  }
-
-  archiveOrders() {
-    return ListView.builder(
-        itemCount: ordersArchive.length,
-        itemBuilder: (context, index) =>
-            ArchiveThemeCard(orderModel: ordersArchive[index]));
-  }
-
-  changePage(name) {
-    namePage = name;
-    update();
-  }
-
-  ratingOrder(String orderId, rating, String comment) async {
+  Future<void> ratingOrder(String orderId, rating, String comment) async {
     statusRequest = StatusRequest.loading;
     update();
-    var response = await ordersData.ratingOrder(
-      orderId,
-      rating,
-      comment,
-    );
+
+    var response = await ordersData.ratingOrder(orderId, rating, comment);
+
     statusRequest = handlingData(response);
-    if (StatusRequest.sucess == statusRequest) {
+    if (statusRequest == StatusRequest.sucess) {
       if (response['status'] == 'success') {
-        Get.showSnackbar(const GetSnackBar(
-          title: 'Thanks',
-          message: 'you rating and message is supmitted 👍',
-          duration: Duration(seconds: 3),
+        Get.showSnackbar(GetSnackBar(
+          title: 'thanks'.tr,
+          message: 'rating_success'.tr,
+          duration: const Duration(seconds: 3),
         ));
-        statusRequest = StatusRequest.sucess;
       } else {
         statusRequest = StatusRequest.failure;
       }
     }
+    update();
   }
 
+  // ─── Navigation ───────────────────────────────────────────
+  void goToOrderDetails(OrderModel orderModel) {
+    Get.toNamed(AppRoute.orderDeitails, arguments: {
+      'orderModel': orderModel,
+    });
+  }
+
+  void changePage(String name) {
+    namePage = name;
+    update();
+  }
+
+  // ─── Dialogs (triggered from UI, but called here) ─────────
+  void confirmDeleteOrder(OrderModel orderModel) {
+    Get.defaultDialog(
+      title: 'delete_order_title'.tr,
+      middleText: '${'delete_order_confirm'.tr} #${orderModel.orderId}',
+      confirm: ElevatedButton(
+        onPressed: () {
+          Get.back();
+          deleteOrder(orderModel);
+        },
+        child: Text('yes'.tr),
+      ),
+      cancel: OutlinedButton(
+        onPressed: () => Get.back(),
+        child: Text('cancel'.tr),
+      ),
+    );
+  }
+
+  // ─── Lifecycle ────────────────────────────────────────────
   @override
   void onInit() {
     getPendingOrders();

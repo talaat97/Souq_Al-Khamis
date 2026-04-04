@@ -34,10 +34,12 @@ class CartController extends GetxController {
 
     if (StatusRequest.sucess == statusRequest) {
       if (response['status'] == 'success') {
-        Get.rawSnackbar(
-            title: 'Done',
-            message: 'iteam add to your Cart',
-            duration: const Duration(seconds: 2));
+        Get.snackbar(
+          'Done',
+          'Item added to your cart',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 2),
+        );
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -57,16 +59,20 @@ class CartController extends GetxController {
 
     if (StatusRequest.sucess == statusRequest) {
       if (response['status'] == 'failure') {
-        Get.rawSnackbar(
-            title: 'opps',
-            message: 'it is arealy out of cart',
-            duration: const Duration(seconds: 2));
+        Get.snackbar(
+          'Oops',
+          'Item is already out of cart',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 2),
+        );
       }
       if (response['status'] == 'success') {
-        Get.rawSnackbar(
-            title: 'Done',
-            message: 'iteam remove from your Cart ',
-            duration: const Duration(seconds: 2));
+        Get.snackbar(
+          'Done',
+          'Item removed from your cart',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 2),
+        );
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -118,11 +124,12 @@ class CartController extends GetxController {
         couponDiscount = 0;
         couponName = null;
         couponId = null;
-        Get.showSnackbar(const GetSnackBar(
-          title: 'OPPS',
-          message: 'coupon not valid',
-          duration: Duration(seconds: 3),
-        ));
+        Get.snackbar(
+          'Oops',
+          'Coupon not valid',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 3),
+        );
         statusRequest = StatusRequest.failure;
       }
     }

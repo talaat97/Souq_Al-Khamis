@@ -59,9 +59,10 @@ class LogeinControllerImp extends LogeinCotroller {
               middleText: "looks like you dont have account yet!");
           statusRequest = StatusRequest.failure;
         }
+      } else {
+        Get.defaultDialog(
+            title: 'OPPPS!', middleText: "looks like server error!");
       }
-      Get.defaultDialog(
-          title: 'OPPPS!', middleText: "looks like server error!");
 
       update();
     }
@@ -91,9 +92,9 @@ class LogeinControllerImp extends LogeinCotroller {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     email.dispose();
     password.dispose();
-    super.dispose();
+    super.onClose();
   }
 }

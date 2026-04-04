@@ -71,11 +71,11 @@ class SignUpControllerImp extends SignUpCotroller {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     email.dispose();
     password.dispose();
     username.dispose();
     phone.dispose();
-    super.dispose();
+    super.onClose();
   }
 }

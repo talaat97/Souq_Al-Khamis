@@ -11,20 +11,27 @@ class Crud {
     try {
       if (await checkinternet()) {
         var response = await http.post(Uri.parse(linkurl), body: data);
+        print('HTTP POST: $linkurl | Status: ${response.statusCode}');
+        
         if (response.statusCode == 200 || response.statusCode == 201) {
-          Map responsebody = jsonDecode(response.body);
-          print(
-              'gave to HTTP reqest        ============================= $data');
-          print(
-              'response from HTTP request ============================= ${response.body}');
-          return Right(responsebody);
+          try {
+            Map responsebody = jsonDecode(response.body);
+            print('Response Body: ${response.body}');
+            return Right(responsebody);
+          } catch (e) {
+            print('JSON Decode Error: $e | Body: ${response.body}');
+            return const Left(StatusRequest.serverExaption);
+          }
         } else {
+          print('Server Failure: ${response.statusCode}');
           return const Left(StatusRequest.serverfailure);
         }
       } else {
+        print('Offline Failure');
         return const Left(StatusRequest.offlinefailure);
       }
-    } catch (_) {
+    } catch (e) {
+      print('Network Exception: $e');
       return const Left(StatusRequest.serverExaption);
     }
   }

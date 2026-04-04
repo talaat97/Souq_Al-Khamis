@@ -1,4 +1,4 @@
-import '../../../../core/class/curd.dart';
+import '../../../../core/class/crud.dart';
 import '../../../../link_api.dart';
 
 class OfferData {
