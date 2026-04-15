@@ -5,12 +5,12 @@ class LoginData {
   Crud crud;
   LoginData(this.crud);
 
-  postData(String email, String password) async {
+  postData(String email, String password, String deviseToken) async {
     var response = await crud.postData(Applink.loginLink, {
       "email": email,
       "password": password,
+      "deviceToken": deviseToken,
     });
-     print(' login data page ============================= ${response}');
     return response.fold((l) => l, (r) => r);
   }
 }

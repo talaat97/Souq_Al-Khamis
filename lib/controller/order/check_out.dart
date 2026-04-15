@@ -1,12 +1,10 @@
 import 'package:souq_al_khamis/core/class/status_request.dart';
 import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/notification/notification_helper.dart';
 import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:souq_al_khamis/data/model/location_Model.dart';
-
 import 'package:get/get.dart';
-
 import '../../core/function/handling_data_controller.dart';
-import '../../core/function/notification_helper.dart';
 import '../../data/datasourse/remote/address/address.dart';
 import '../../data/datasourse/remote/orders/Checkout_data.dart';
 
@@ -20,7 +18,7 @@ class CheckoutContoller extends GetxController {
   late String couponId;
   late String couponDiscount;
   late String shipping;
-  late var deviseToken;
+  late String deviseToken;
   List<AddressModel> addresses = [];
   AddressData addressData = AddressData(Get.find());
   MyServices myServices = Get.find();
@@ -104,7 +102,8 @@ class CheckoutContoller extends GetxController {
     couponId = Get.arguments['couponId'].toString();
     couponDiscount = Get.arguments['couponDiscount'].toString();
     shipping = Get.arguments['shipping'].toString();
-    deviseToken = NotificationsHelper.firebaseMessaging.getToken();
+    // Use the stored FCM token (fetched and stored during app initialization)
+    deviseToken = NotificationsHelper.firebaseMessaging.getToken().toString();
     getAddresses();
     super.onInit();
   }

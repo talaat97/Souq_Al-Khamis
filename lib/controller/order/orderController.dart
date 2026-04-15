@@ -123,11 +123,13 @@ class OrderController extends GetxController {
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.sucess) {
       if (response['status'] == 'success') {
-        Get.showSnackbar(GetSnackBar(
-          title: 'thanks'.tr,
-          message: 'rating_success'.tr,
-          duration: const Duration(seconds: 3),
-        ));
+        Get.showSnackbar(
+          GetSnackBar(
+            title: 'thanks'.tr,
+            message: 'rating_success'.tr,
+            duration: const Duration(seconds: 3),
+          ),
+        );
       } else {
         statusRequest = StatusRequest.failure;
       }

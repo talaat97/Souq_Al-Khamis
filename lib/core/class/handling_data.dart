@@ -84,6 +84,10 @@ class _ShimmerLoadingState extends State<_ShimmerLoading>
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      // Make the shimmer list non-scrolling and allow it to size itself when
+      // used inside another scrollable (prevents unbounded height errors).
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       itemCount: 5,
       separatorBuilder: (_, __) => const SizedBox(height: 12),

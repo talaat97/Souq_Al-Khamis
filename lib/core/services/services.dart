@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../function/notification_helper.dart';
+import 'package:souq_al_khamis/core/services/notification/notification_helper.dart';
 
 class MyServices extends GetxService {
   late SharedPreferences sharedPreferences;
-
   Future<MyServices> intIt() async {
     sharedPreferences = await SharedPreferences.getInstance();
     return this;
@@ -13,15 +11,9 @@ class MyServices extends GetxService {
 }
 
 initialServices() async {
-  // var accessToken = await NotificationsHelper().getAccessToken();
-  var deviseToken = await NotificationsHelper.firebaseMessaging.getToken();
-  print(
-      '========================================================================================');
-  print("Devise Token: $deviseToken");
-  print(
-      '========================================================================================');
-
+  var deviceToken = await NotificationsHelper.firebaseMessaging.getToken();
+  print(deviceToken);
   NotificationsHelper().requestPermissionNotification();
-  NotificationsHelper().fcmconfig();
+  NotificationsHelper().configFCM();
   await Get.putAsync(() => MyServices().intIt());
 }

@@ -12,7 +12,7 @@ class Crud {
       if (await checkinternet()) {
         var response = await http.post(Uri.parse(linkurl), body: data);
         print('HTTP POST: $linkurl | Status: ${response.statusCode}');
-        
+
         if (response.statusCode == 200 || response.statusCode == 201) {
           try {
             Map responsebody = jsonDecode(response.body);

@@ -12,11 +12,11 @@ class Listiteams extends GetView<HomeControllerImp> {
   Widget build(BuildContext context) {
     // Make the grid responsive: compute childAspectRatio from available width so
     // items keep good proportions on different screen sizes.
-    final int crossAxisCount = 2;
+    const int crossAxisCount = 2;
     const double spacing = 16;
     final double screenWidth = MediaQuery.of(context).size.width;
     // Parent `HomePage` adds horizontal padding of 15, so subtract it.
-    final double horizontalPadding = 30; // 15 left + 15 right
+    const double horizontalPadding = 30; // 15 left + 15 right
     final double availableWidth =
         screenWidth - horizontalPadding - (spacing * (crossAxisCount - 1));
     final double itemWidth = availableWidth / crossAxisCount;

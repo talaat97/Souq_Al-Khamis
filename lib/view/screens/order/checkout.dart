@@ -2,7 +2,7 @@ import 'package:souq_al_khamis/core/class/handling_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/order/Checkout.dart';
+import '../../../controller/order/check_out.dart';
 import '../../../core/constant/image_assets.dart';
 import '../../widgets/checkout/CardPaymentMethodCheckout.dart';
 import '../../widgets/checkout/CardShppingAddressCheckout.dart';

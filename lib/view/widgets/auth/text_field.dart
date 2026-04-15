@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final String labelText;
+  final Color? activeColor;
   final TextEditingController myController;
   final IconData myIcon;
   final String? Function(String? val)? valid;
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.obscureText,
     this.onTapIcon,
+    this.activeColor,
   });
 
   @override
@@ -35,9 +37,9 @@ class CustomTextField extends StatelessWidget {
           ? InkWell(
               onTap: onTapIcon,
               borderRadius: BorderRadius.circular(50),
-              child: Icon(myIcon, color: Colors.grey.shade600),
+              child: Icon(myIcon, color: activeColor),
             )
-          : Icon(myIcon, color: Colors.grey.shade400),
+          : Icon(myIcon, color: activeColor),
         hintText: hintText,
         labelText: labelText,
       ),

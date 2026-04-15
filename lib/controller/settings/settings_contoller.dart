@@ -1,7 +1,7 @@
 import 'package:souq_al_khamis/core/constant/colors.dart';
 import 'package:souq_al_khamis/core/constant/routs_page.dart';
 import 'package:souq_al_khamis/core/services/services.dart';
-import 'package:souq_al_khamis/core/function/notification_helper.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +20,7 @@ class SettingsContoller extends GetxController {
       middleText: "logout_confirm".tr,
       onConfirm: () {
         myServices.sharedPreferences.setString('step', 'onboarding');
-        NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
+       // NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
         Get.offAllNamed(AppRoute.login);
       },
       onCancel: () {},
@@ -41,9 +41,9 @@ class SettingsContoller extends GetxController {
 
   diableNotification() {
     if (notifactionSwitch) {
-      NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
+    //  NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
     } else {
-      NotificationsHelper.firebaseMessaging.subscribeToTopic('users');
+      //NotificationsHelper.firebaseMessaging.subscribeToTopic('users');
     }
     print(
         '////////////////////////////////////////////////////////////////////');

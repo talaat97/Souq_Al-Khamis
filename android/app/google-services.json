@@ -7,6 +7,44 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:441098954988:android:c0a3cfe3689194bba6ddc9",
+        "android_client_info": {
+          "package_name": "com.example.souq_al_khamis_admin_version"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDR7hf46eKhfngltjI0kwXIHh9Zg1EBe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441098954988:android:858dfed7e20c84dca6ddc9",
+        "android_client_info": {
+          "package_name": "com.example.souq_al_khamis_delivey_version"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDR7hf46eKhfngltjI0kwXIHh9Zg1EBe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:441098954988:android:77c13151c05b0391a6ddc9",
         "android_client_info": {
           "package_name": "com.talaat.souq_al_khamis"
