@@ -35,6 +35,14 @@ class HandlingDataView extends StatelessWidget {
           subtitle: 'try_again_later'.tr,
           onRetry: onRetry,
         );
+      case StatusRequest.serverExaption:
+        return _StateView(
+          icon: Icons.cloud_off_rounded,
+          iconColor: Colors.red,
+          title: 'server_error'.tr,
+          subtitle: 'try_again_later'.tr,
+          onRetry: onRetry,
+        );
       case StatusRequest.failure:
         return _StateView(
           icon: Icons.inbox_rounded,

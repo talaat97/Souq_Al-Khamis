@@ -26,7 +26,7 @@ class BottomNavBarControllerImp extends BottomNavBarController {
     },
     {
       "title": '46'.tr,
-      "icon": Icons.person,
+      "icon": Icons.shopping_cart,
     },
     {
       "title": '47'.tr,

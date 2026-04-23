@@ -18,7 +18,8 @@ abstract class HomeController extends SearchMixController {
 
 class HomeControllerImp extends HomeController {
   MyServices myServices = Get.find();
-  late HomeModel homeModel;
+  HomeModel homeModel = HomeModel(
+      categories: [], iteams: [], newArrivals: [], offers: [], recommended: []);
   List<CategoiresModel> categories = [];
   List<IteamsModel> newArrivals = [];
   List<IteamsModel> offers = [];
@@ -66,8 +67,10 @@ class HomeControllerImp extends HomeController {
         recommended = homeModel.recommended;
 
         statusRequest = StatusRequest.success;
-      } else {
+      } else if (response['status'] == 'faluire') {
         statusRequest = StatusRequest.failure;
+      } else {
+        statusRequest = StatusRequest.serverExaption;
       }
     }
     update();

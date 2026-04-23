@@ -13,17 +13,36 @@ class Customtitleitmeams extends GetView<HomeControllerImp> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      alignment:
-          controller.lang == 'ar' ? Alignment.topRight : Alignment.topLeft,
-      child: Text(
-        title,
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge!
-            .copyWith(color: AppColor.primaryColor),
-      ),
+    final isAr = controller.lang == 'ar';
+
+    return Row(
+      textDirection: isAr ? TextDirection.rtl : TextDirection.ltr,
+      children: [
+        // Bold accent bar — primaryColor (orange) for energy
+        Container(
+          width: 4,
+          height: 22,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [AppColor.primaryColor, AppColor.secondColor],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        const SizedBox(width: 8),
+        // Title — secondColor (deep brown) pairs with the cream background
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: AppColor.secondColor,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.2,
+                fontSize: 18,
+              ),
+        ),
+      ],
     );
   }
 }

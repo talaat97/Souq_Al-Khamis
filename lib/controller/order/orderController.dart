@@ -139,6 +139,7 @@ class OrderController extends GetxController {
             duration: const Duration(seconds: 3),
           ),
         );
+        statusRequest = StatusRequest.success;
       } else {
         statusRequest = StatusRequest.failure;
       }

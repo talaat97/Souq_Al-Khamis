@@ -11,11 +11,15 @@ class Listcategories extends GetView<HomeControllerImp> {
 
   @override
   Widget build(BuildContext context) {
+    if (controller.categories.isEmpty) {
+      return const _EmptyCategoriesState();
+    }
+
     return SizedBox(
       height: 110,
       child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
         separatorBuilder: (context, index) => const SizedBox(width: 16),
         scrollDirection: Axis.horizontal,
         itemCount: controller.categories.length,
@@ -41,7 +45,8 @@ class Categories extends GetView<HomeControllerImp> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.goToItems(controller.categories, i, categoiresModel.categoriesName!);
+        controller.goToItems(
+            controller.categories, i, categoiresModel.categoriesName!);
       },
       borderRadius: BorderRadius.circular(12),
       child: Column(
@@ -50,10 +55,14 @@ class Categories extends GetView<HomeControllerImp> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: Theme.of(context).cardColor,
+              // Warm cream — consistent with page background
+              color: const Color(0xffFFF8F3),
+              border: Border.all(
+                color: const Color(0xffDB6719).withValues(alpha: 0.15),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Theme.of(context).primaryColor.withOpacity(0.1),
+                  color: Theme.of(context).primaryColor.withOpacity(0.12),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -64,24 +73,63 @@ class Categories extends GetView<HomeControllerImp> {
             width: 64,
             child: SvgPicture.network(
               "${Applink.categoriesLink}/${categoiresModel.categoriesImage}",
-              colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).primaryColor, BlendMode.srcIn),
               placeholderBuilder: (context) => const Center(
                 child: SizedBox(
-                  width: 20, 
-                  height: 20, 
-                  child: CircularProgressIndicator(strokeWidth: 2)
-                ),
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2)),
               ),
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            tr(categoiresModel.categoriesName, categoiresModel.categoriesNameAr),
+            tr(categoiresModel.categoriesName,
+                categoiresModel.categoriesNameAr),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _EmptyCategoriesState extends StatelessWidget {
+  const _EmptyCategoriesState();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 110,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.category_outlined,
+              size: 40,
+              color: Colors.grey.shade400,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "No categories available",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Colors.grey.shade600,
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "Please check back later",
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Colors.grey.shade500,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }

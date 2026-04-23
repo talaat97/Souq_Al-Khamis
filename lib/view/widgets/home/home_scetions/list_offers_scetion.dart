@@ -2,122 +2,234 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controller/home/home_controller.dart';
+import '../../../../data/model/iteams_model.dart';
 import '../../../../link_api.dart';
 
-class ListOffers extends GetView<HomeControllerImp> {
+class ListOffers extends StatefulWidget {
   const ListOffers({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: controller.offers.length,
-        itemBuilder: (context, index) {
-          final item = controller.offers[index];
+  State<ListOffers> createState() => _ListOffersState();
+}
 
-          return Container(
-            width: 280,
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.12),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
+class _ListOffersState extends State<ListOffers> {
+  final controller = Get.find<HomeControllerImp>();
+  final PageController _pageController = PageController(viewportFraction: 0.9);
+
+  int currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// Auto slide every 2 seconds
+    Future.delayed(const Duration(seconds: 2), autoSlide);
+  }
+
+  void autoSlide() {
+    if (!mounted) return;
+
+    final offers = controller.offers;
+
+    if (offers.isEmpty) return;
+
+    currentPage++;
+
+    if (currentPage >= offers.length) {
+      currentPage = 0;
+    }
+
+    _pageController.animateToPage(
+      currentPage,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+
+    Future.delayed(const Duration(seconds: 2), autoSlide);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final offers = controller.offers;
+
+    if (offers.isEmpty) {
+      return const _EmptyOffersState();
+    }
+
+    return SizedBox(
+      height: 230,
+      child: PageView.builder(
+        controller: _pageController,
+        itemCount: offers.length,
+        onPageChanged: (index) {
+          currentPage = index;
+        },
+        itemBuilder: (context, index) {
+          return _OfferCard(item: offers[index]);
+        },
+      ),
+    );
+  }
+}
+
+class _OfferCard extends GetView<HomeControllerImp> {
+  final IteamsModel item;
+
+  const _OfferCard({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: () {
+          controller.goToitemsDeails(item);
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.06),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Stack(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: "${Applink.iteamsLink}/${item.iteamsImage}",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.75),
+                        Colors.transparent,
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 12,
+                  left: 12,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.error,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      "-${item.iteamsDiscount}%",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 14,
+                  left: 14,
+                  right: 14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.iteamsName ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "${item.iteamsPrice} \$",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-            child: InkWell(
-              onTap: () {
-                controller.goToitemsDeails(item);
-              },
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          "${Applink.iteamsLink}/${item.iteamsImage}",
-                      height: 200,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-                  Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(0.85),
-                          Colors.transparent,
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        stops: const [0.0, 0.7], // Smooth out the gradient curve
-                      ),
-                    ),
-                  ),
+class _EmptyOffersState extends StatelessWidget {
+  const _EmptyOffersState();
 
-                  Positioned(
-                    top: 12,
-                    left: 12,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.error,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        "-${item.iteamsDiscount}%",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ),
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
 
-                  Positioned(
-                    bottom: 16,
-                    left: 16,
-                    right: 16,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item.iteamsName ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "${item.iteamsPrice} \$",
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+    return SizedBox(
+      height: 230,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              /// Highlight circle
+              Container(
+                padding: const EdgeInsets.all(18),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.error.withOpacity(0.08),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.local_offer_outlined,
+                  size: 44,
+                  color: theme.colorScheme.error,
+                ),
               ),
-            ),
-          );
-        },
+
+              const SizedBox(height: 16),
+
+              Text(
+                "No offers available",
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 6),
+
+              Text(
+                "Check back later for exciting deals and discounts!",
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: Colors.grey.shade600,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

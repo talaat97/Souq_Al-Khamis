@@ -1,6 +1,7 @@
 import 'package:souq_al_khamis/core/class/status_request.dart';
 import 'package:souq_al_khamis/core/constant/routs_page.dart';
 import 'package:get/get.dart';
+import 'package:souq_al_khamis/data/model/iteams_model.dart';
 
 import '../../core/function/handling_data_controller.dart';
 import '../../core/services/services.dart';
@@ -13,7 +14,7 @@ abstract class ItemsDetailController extends GetxController {
 class ItemsDetailControllerImp extends ItemsDetailController {
   CartData cartData = CartData(Get.find());
   MyServices myServices = Get.find();
-  late var iteamsModel;
+  late IteamsModel iteamsModel;
 
   int countItemInCart = 0;
   late StatusRequest statusRequest;
@@ -49,11 +50,9 @@ class ItemsDetailControllerImp extends ItemsDetailController {
   @override
   intialData() async {
     statusRequest = StatusRequest.loading;
-    iteamsModel = Get.arguments['itemModel'];
-    print('////////////////////////////////////////////////////////////////');
-    print(iteamsModel);
-    print('////////////////////////////////////////////////////////////////');
 
+    iteamsModel = Get.arguments['itemModel'];
+    iteamsModel.iteamPriceDescount ??=  iteamsModel.iteamsPrice! * (1 - (iteamsModel.iteamsDiscount! / 100));
     await getCount(iteamsModel.iteamsId!);
     statusRequest = StatusRequest.success;
     update();

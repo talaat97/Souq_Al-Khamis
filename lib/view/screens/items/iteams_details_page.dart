@@ -72,17 +72,21 @@ class ItemsDetailsPage extends StatelessWidget {
                 Text(
                   "${tr(itemsDetailController.iteamsModel.iteamsDec, itemsDetailController.iteamsModel.iteamsDecAr)} Anim veniam incididunt nisi nisi et esse mollit consectetur deserunt labore.",
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.grey.shade600,
-                    height: 1.6,
-                  ),
+                        color: Colors.grey.shade600,
+                        height: 1.6,
+                      ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 24),
                   child: Divider(height: 1),
                 ),
                 Text(
-                  'Colors & Options'.tr, // Generalizing "49" text which makes no sense structurally
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                  'Colors & Options'
+                      .tr, // Generalizing "49" text which makes no sense structurally
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
                 const SubitemsList(),
@@ -95,16 +99,15 @@ class ItemsDetailsPage extends StatelessWidget {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 16,
-              offset: const Offset(0, -4),
-            )
-          ]
-        ),
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 16,
+                offset: const Offset(0, -4),
+              )
+            ]),
         child: AppButton(
           text: 'Go to cart'.tr,
           onPressed: () {
