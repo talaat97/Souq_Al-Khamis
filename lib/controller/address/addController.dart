@@ -88,7 +88,7 @@ class AddressEditController extends GetxController {
         zoom: 12,
       );
       addMarker(LatLng(position!.latitude, position!.longitude));
-      statusRequest = StatusRequest.sucess;
+      statusRequest = StatusRequest.success;
     } catch (e) {
       print('Location Error: $e');
       statusRequest = StatusRequest.serverExaption;

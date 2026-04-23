@@ -30,7 +30,8 @@ class PriceAndCountItems extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor.withOpacity(0.05),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.1)),
+            border: Border.all(
+                color: Theme.of(context).primaryColor.withOpacity(0.1)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -39,22 +40,29 @@ class PriceAndCountItems extends StatelessWidget {
               SizedBox(
                 width: 40,
                 child: GetBuilder<ItemsDetailControllerImp>(
-                  builder: (controller) => controller.statusRequest == StatusRequest.sucess
+                  builder: (controller) => controller.statusRequest ==
+                          StatusRequest.success
                       ? Text(
                           '$count',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                           textAlign: TextAlign.center,
                         )
-                      : const Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))),
+                      : const Center(
+                          child: SizedBox(
+                              height: 20,
+                              width: 20,
+                              child:
+                                  CircularProgressIndicator(strokeWidth: 2))),
                 ),
               ),
               _buildStepperBtn(context, Icons.add, addCount),
             ],
           ),
         ),
-        
+
         // Price
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -63,18 +71,18 @@ class PriceAndCountItems extends StatelessWidget {
               Text(
                 '$discountPrice \$',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.grey.shade500,
-                  decoration: TextDecoration.lineThrough,
-                  height: 1.0,
-                ),
+                      color: Colors.grey.shade500,
+                      decoration: TextDecoration.lineThrough,
+                      height: 1.0,
+                    ),
               ),
             Text(
               '$price \$',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-                height: 1.2,
-              ),
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                    height: 1.2,
+                  ),
             ),
           ],
         ),
@@ -82,7 +90,8 @@ class PriceAndCountItems extends StatelessWidget {
     );
   }
 
-  Widget _buildStepperBtn(BuildContext context, IconData icon, VoidCallback? onTap) {
+  Widget _buildStepperBtn(
+      BuildContext context, IconData icon, VoidCallback? onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(24),

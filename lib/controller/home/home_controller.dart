@@ -3,12 +3,10 @@ import 'package:souq_al_khamis/core/services/notification/notification_helper.da
 import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:souq_al_khamis/data/datasourse/remote/home/home_data.dart';
 import 'package:souq_al_khamis/data/model/categoires_model.dart';
+import 'package:souq_al_khamis/data/model/home_model.dart';
 import 'package:souq_al_khamis/data/model/iteams_model.dart';
-
-import 'package:souq_al_khamis/data/model/topSailer_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
 import '../../core/class/status_request.dart';
 import '../../core/function/handling_data_controller.dart';
 
@@ -20,9 +18,12 @@ abstract class HomeController extends SearchMixController {
 
 class HomeControllerImp extends HomeController {
   MyServices myServices = Get.find();
+  late HomeModel homeModel;
   List<CategoiresModel> categories = [];
-  List<TopSailerModel> iteams = [];
-
+  List<IteamsModel> newArrivals = [];
+  List<IteamsModel> offers = [];
+  List<IteamsModel> recommended = [];
+  List<IteamsModel> iteams = [];
   String? username;
   String? id;
   String? lang;
@@ -54,14 +55,17 @@ class HomeControllerImp extends HomeController {
     var response = await homeData.getData();
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
-        List responseCategoriesData = response['categories'];
-        categories.addAll(
-            responseCategoriesData.map((e) => CategoiresModel.fromJson(e)));
+        homeModel = HomeModel.fromJson(response);
 
-        List responseIteamData = response['iteams'];
-        iteams.addAll(responseIteamData.map((e) => TopSailerModel.fromJson(e)));
+        categories = homeModel.categories;
+        iteams = homeModel.iteams;
+        newArrivals = homeModel.newArrivals;
+        offers = homeModel.offers;
+        recommended = homeModel.recommended;
+
+        statusRequest = StatusRequest.success;
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -113,7 +117,7 @@ class SearchMixController extends GetxController {
     var response = await homeData.searchData(searchContoller!.text);
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         searchData.clear();
         List responseData = response['data'];

@@ -42,7 +42,7 @@ class ResetPasswordControllerImp extends ResetPasswordController {
       );
       statusRequest = handlingData(response);
       // print(' login Contorller page ============================= $response');
-      if (StatusRequest.sucess == statusRequest) {
+      if (StatusRequest.success == statusRequest) {
         if (response['status'] == 'success') {
           Get.offAllNamed(AppRoute.successResetPassword);
         } else {

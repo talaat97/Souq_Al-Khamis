@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:souq_al_khamis/data/model/topSailer_model.dart';
+import 'package:souq_al_khamis/data/model/iteams_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controller/home/home_controller.dart';
-import '../../../link_api.dart';
+import '../../../../controller/home/home_controller.dart';
+import '../../../../link_api.dart';
 
 class Listiteams extends GetView<HomeControllerImp> {
   const Listiteams({super.key});
@@ -36,9 +37,9 @@ class Listiteams extends GetView<HomeControllerImp> {
         crossAxisSpacing: spacing,
         mainAxisSpacing: spacing,
       ),
-      itemCount: controller.iteams.length,
+      itemCount: controller.homeModel.iteams.length,
       itemBuilder: (context, index) => Iteams(
-        topSailerModel: controller.iteams[index],
+        iteamsModel: controller.homeModel.iteams[index],
         topSalier: index + 1,
       ),
     );
@@ -46,17 +47,17 @@ class Listiteams extends GetView<HomeControllerImp> {
 }
 
 class Iteams extends GetView<HomeControllerImp> {
-  final TopSailerModel topSailerModel;
+  final IteamsModel iteamsModel;
   final int topSalier;
 
   const Iteams(
-      {super.key, required this.topSailerModel, required this.topSalier});
+      {super.key, required this.iteamsModel, required this.topSalier});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.goToitemsDeails(topSailerModel);
+        controller.goToitemsDeails(iteamsModel);
       },
       borderRadius: BorderRadius.circular(16),
       child: Container(
@@ -81,7 +82,7 @@ class Iteams extends GetView<HomeControllerImp> {
                   child: CachedNetworkImage(
                     // 🐛 BUG FIX: implemented cached_network_image requirement
                     imageUrl:
-                        "${Applink.iteamsLink}/${topSailerModel.iteamsImage}",
+                        "${Applink.iteamsLink}/${iteamsModel.iteamsImage}",
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Container(
                       color: Colors.grey.shade100,
@@ -97,7 +98,7 @@ class Iteams extends GetView<HomeControllerImp> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        topSailerModel.iteamsName ?? '',
+                        iteamsModel.iteamsName ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style:
@@ -107,7 +108,7 @@ class Iteams extends GetView<HomeControllerImp> {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "${topSailerModel.iteamsPrice} \$",
+                        "${iteamsModel.iteamsPrice} \$",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,

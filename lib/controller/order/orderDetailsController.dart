@@ -44,7 +44,7 @@ class Orderdetailscontroller extends GetxController {
       orderModel.orderId!.toString(),
     );
     statusRequest = handlingData(response);
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         List responseList = response['data'];
         orderDetailsList.addAll(responseList.map(
@@ -53,7 +53,7 @@ class Orderdetailscontroller extends GetxController {
         // orderDetailsList = response['data']
         //     .map<OrderDetailsModel>((item) => OrderDetailsModel.fromJson(item))
         //     .toList();
-        statusRequest = StatusRequest.sucess;
+        statusRequest = StatusRequest.success;
       } else {
         statusRequest = StatusRequest.failure;
       }

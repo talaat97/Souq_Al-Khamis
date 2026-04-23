@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import '../../core/class/status_request.dart';
 import '../../core/function/handling_data_controller.dart';
 
-
 abstract class LogeinCotroller extends GetxController {
   login();
   goToSignUp();
@@ -32,14 +31,14 @@ class LogeinControllerImp extends LogeinCotroller {
       statusRequest = StatusRequest.loading;
       update();
       // Get the stored FCM token (or fallback to fetching a new one)
-    
+
       var response = await loginData.postData(
         email.text,
         password.text,
         deviseToken ?? '',
       );
       statusRequest = handlingData(response);
-      if (StatusRequest.sucess == statusRequest) {
+      if (StatusRequest.success == statusRequest) {
         if (response['status'] == "success" &&
             response['data']['users_approve'] == "1") {
           myServices.sharedPreferences

@@ -2,13 +2,13 @@ import 'package:souq_al_khamis/controller/favorite/favoriteController.dart';
 import 'package:souq_al_khamis/controller/items/itemsControlller.dart';
 import 'package:souq_al_khamis/core/class/handling_data.dart';
 import 'package:souq_al_khamis/data/model/iteams_model.dart';
+import 'package:souq_al_khamis/view/widgets/home/search_list.dart';
 import 'package:souq_al_khamis/view/widgets/items/CustomlistItems.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/home/CustomAppbar.dart';
 import '../../widgets/items/ListCategoriesItems.dart';
-import '../home/home_page.dart';
 
 class ItemsPage extends StatelessWidget {
   const ItemsPage({super.key});

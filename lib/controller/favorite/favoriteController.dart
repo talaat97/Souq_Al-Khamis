@@ -24,7 +24,7 @@ class FavoriteController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         favoriteIteams.addAll(response['data']);
         print(favoriteIteams);
@@ -50,7 +50,7 @@ class FavoriteController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         Get.rawSnackbar(title: 'Done', message: 'iteam add to favorite ');
       } else {
@@ -68,7 +68,7 @@ class FavoriteController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         Get.rawSnackbar(title: 'Done', message: 'iteam remove from favorite ');
       } else {

@@ -29,20 +29,29 @@ class OrderController extends GetxController {
 
   String printOrderStatus(String val) {
     switch (val) {
-      case '1': return 'status_wait_approve'.tr;
-      case '2': return 'status_preparing'.tr;
-      case '3': return 'status_on_way'.tr;
-      case '4': return 'status_archived'.tr;
-      default:  return '';
+      case '1':
+        return 'status_wait_approve'.tr;
+      case '2':
+        return 'status_preparing'.tr;
+      case '3':
+        return 'status_on_way'.tr;
+      case '4':
+        return 'status_archived'.tr;
+      default:
+        return '';
     }
   }
 
   Color colorCard(String val) {
     switch (val) {
-      case '1': return const Color.fromARGB(255, 255, 196, 3);
-      case '2': return const Color.fromARGB(150, 255, 196, 3);
-      case '3': return const Color.fromARGB(255, 76, 175, 80);
-      default:  return const Color.fromARGB(255, 158, 158, 158);
+      case '1':
+        return const Color.fromARGB(255, 255, 196, 3);
+      case '2':
+        return const Color.fromARGB(150, 255, 196, 3);
+      case '3':
+        return const Color.fromARGB(255, 76, 175, 80);
+      default:
+        return const Color.fromARGB(255, 158, 158, 158);
     }
   }
 
@@ -57,7 +66,7 @@ class OrderController extends GetxController {
     );
 
     statusRequest = handlingData(response);
-    if (statusRequest == StatusRequest.sucess) {
+    if (statusRequest == StatusRequest.success) {
       if (response['status'] == 'success') {
         List responseData = response['data'];
         ordersPending.addAll(responseData.map((e) => OrderModel.fromJson(e)));
@@ -78,7 +87,7 @@ class OrderController extends GetxController {
     );
 
     statusRequest = handlingData(response);
-    if (statusRequest == StatusRequest.sucess) {
+    if (statusRequest == StatusRequest.success) {
       if (response['status'] == 'success') {
         List responseData = response['data'];
         ordersArchive.addAll(responseData.map((e) => OrderModel.fromJson(e)));
@@ -103,10 +112,10 @@ class OrderController extends GetxController {
     );
 
     statusRequest = handlingData(response);
-    if (statusRequest == StatusRequest.sucess) {
+    if (statusRequest == StatusRequest.success) {
       if (response['status'] == 'success') {
         ordersPending.remove(orderModel);
-        statusRequest = StatusRequest.sucess;
+        statusRequest = StatusRequest.success;
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -121,7 +130,7 @@ class OrderController extends GetxController {
     var response = await ordersData.ratingOrder(orderId, rating, comment);
 
     statusRequest = handlingData(response);
-    if (statusRequest == StatusRequest.sucess) {
+    if (statusRequest == StatusRequest.success) {
       if (response['status'] == 'success') {
         Get.showSnackbar(
           GetSnackBar(

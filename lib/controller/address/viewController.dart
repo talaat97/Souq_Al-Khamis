@@ -21,7 +21,7 @@ class ViewAddressController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         List responsedata = response['data'];
         addresses.addAll(responsedata.map((e) => AddressModel.fromJson(e)));

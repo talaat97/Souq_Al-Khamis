@@ -46,7 +46,7 @@ class CheckoutContoller extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         List responsedata = response['data'];
         addresses.addAll(responsedata.map((e) => AddressModel.fromJson(e)));
@@ -83,7 +83,7 @@ class CheckoutContoller extends GetxController {
     var response = await checkoutData.checkout(data);
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         Get.offAllNamed(AppRoute.home);
       } else {

@@ -60,7 +60,7 @@ class EditAddressController extends GetxController {
       zoom: 15,
     );
     addMarkerOfMyplace(locationOfThisAddress);
-    statusRequest = StatusRequest.sucess;
+    statusRequest = StatusRequest.success;
     update();
   }
 

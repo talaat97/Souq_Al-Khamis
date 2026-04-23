@@ -26,7 +26,7 @@ class NotificationContoller extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         notificationList = response['data'];
       } else {

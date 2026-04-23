@@ -57,7 +57,7 @@ class ItemsControllerTmp extends SearchMixController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         items.addAll(response['data']);
       } else {

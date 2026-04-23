@@ -36,7 +36,7 @@ class ItemsDetailControllerImp extends ItemsDetailController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         countItemInCart = int.parse(response["data"]);
         return countItemInCart;
@@ -55,7 +55,7 @@ class ItemsDetailControllerImp extends ItemsDetailController {
     print('////////////////////////////////////////////////////////////////');
 
     await getCount(iteamsModel.iteamsId!);
-    statusRequest = StatusRequest.sucess;
+    statusRequest = StatusRequest.success;
     update();
   }
 

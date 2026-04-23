@@ -32,7 +32,7 @@ class CartController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         Get.snackbar(
           'Done',
@@ -57,7 +57,7 @@ class CartController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'failure') {
         Get.snackbar(
           'Oops',
@@ -87,7 +87,7 @@ class CartController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         List responsedata = response['Cartdata'];
         cartIteams.addAll(responsedata.map((e) => CartModel.fromJson(e)));
@@ -114,7 +114,7 @@ class CartController extends GetxController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         couponDiscount = double.parse(response['data']['coupon_discount']);
         couponName = response['data']['coupon_name'];

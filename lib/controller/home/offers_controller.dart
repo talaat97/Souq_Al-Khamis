@@ -16,7 +16,7 @@ class OffersController extends GetxController {
     var response = await favoirteData.viewOffers();
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         offerIteams = response['data']
             .map<OfferModel>((item) => OfferModel.fromJson(item))

@@ -14,6 +14,7 @@ class Customtitleitmeams extends GetView<HomeControllerImp> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
       alignment:
           controller.lang == 'ar' ? Alignment.topRight : Alignment.topLeft,
       child: Text(

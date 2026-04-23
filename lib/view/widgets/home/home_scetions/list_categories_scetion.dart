@@ -4,7 +4,7 @@ import 'package:souq_al_khamis/data/model/categoires_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../link_api.dart';
+import '../../../../link_api.dart';
 
 class Listcategories extends GetView<HomeControllerImp> {
   const Listcategories({super.key});
@@ -50,7 +50,14 @@ class Categories extends GetView<HomeControllerImp> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: Theme.of(context).primaryColor.withOpacity(0.1),
+              color: Theme.of(context).cardColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).primaryColor.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             padding: const EdgeInsets.all(16),
             height: 64,

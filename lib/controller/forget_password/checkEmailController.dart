@@ -30,7 +30,7 @@ class CheckPasswordControllerImp extends CheckPasswordController {
       var response = await checkEmailData.postData(email.text);
       statusRequest = handlingData(response);
       // print(' login Contorller page ============================= $response');
-      if (StatusRequest.sucess == statusRequest) {
+      if (StatusRequest.success == statusRequest) {
         if (response['status'] == "success") {
           Get.offNamed(AppRoute.verfiyCodeCheckEmail, arguments: {
             'email': email.text,

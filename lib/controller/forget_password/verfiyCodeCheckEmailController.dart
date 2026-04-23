@@ -34,7 +34,7 @@ class VerfiyCodeCheckEmailControllerImp extends VerfiyCodeCheckEmailController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         Get.offNamed(AppRoute.resetPassword, arguments: {
           'email': email,

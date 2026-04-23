@@ -47,7 +47,7 @@ class SignUpControllerImp extends SignUpCotroller {
       );
       statusRequest = handlingData(response);
 
-      if (StatusRequest.sucess == statusRequest) {
+      if (StatusRequest.success == statusRequest) {
         if (response['status'] == 'success') {
           Get.toNamed(AppRoute.verfiyCodeSignup, arguments: {
             "email": email.text,

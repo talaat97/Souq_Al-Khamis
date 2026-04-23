@@ -33,7 +33,7 @@ class VerfiyCodeSignUpControllerImp extends VerfiyCodeSignUpController {
     );
     statusRequest = handlingData(response);
 
-    if (StatusRequest.sucess == statusRequest) {
+    if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         Get.offNamed(AppRoute.successSignUp);
       } else {
