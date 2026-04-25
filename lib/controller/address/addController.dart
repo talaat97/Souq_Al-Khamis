@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:souq_al_khamis/core/class/status_request.dart';
 import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/notification/notification_ui_service.dart';
 import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:souq_al_khamis/data/datasourse/remote/address/address.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +36,15 @@ class AddressEditController extends GetxController {
       );
       if (response['status'] == "success") {
         goToAddressView();
-        Get.snackbar('Well done !', 'Now you can order from this address');
+        NotificationUIService.showBanner(
+          title: 'Success',
+          body: 'Address added successfully',
+        );
       } else if (response['status'] == "failure") {
-        print('=================================== location response failure');
+        NotificationUIService.showBanner(
+          title: 'Failure',
+          body: 'Address not added successfully',
+        );
       }
     }
   }

@@ -24,18 +24,13 @@ class NotificationsHelper {
 
   configFCM() {
     FirebaseMessaging.onMessage.listen((message) {
-      // Delaying slightly allows the GetMaterialApp overlay to completely mount
-      // especially if a notification triggers precisely as the app is opening.
-      Future.delayed(const Duration(milliseconds: 500), () {
-        if (Get.key.currentContext != null) {
-          FlutterRingtonePlayer().playNotification();
-
-          NotificationUIService.showBanner(
-            title: message.notification?.title ?? "Notification",
-            body: message.notification?.body ?? "",
-          );
-        }
-      });
+      if (Get.key.currentContext != null) {
+        FlutterRingtonePlayer().playNotification();
+        NotificationUIService.showBanner(
+          title: message.notification?.title ?? "Notification",
+          body: message.notification?.body ?? "",
+        );
+      }
     });
   }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souq_al_khamis/core/constant/colors.dart';
 
-
 class NotificationUIService {
   static void showBanner({
     required String title,
@@ -11,11 +10,8 @@ class NotificationUIService {
   }) {
     final context = Get.key.currentContext;
 
-    if (context == null) return; // 🛑 prevent crash
-
+    if (context == null) return; 
     final messenger = ScaffoldMessenger.of(context);
-
-    // Remove current banner if exists (avoid stacking)
     messenger.hideCurrentMaterialBanner();
 
     messenger.showMaterialBanner(

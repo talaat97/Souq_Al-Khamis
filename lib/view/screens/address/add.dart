@@ -14,13 +14,6 @@ class AddressAdd extends StatelessWidget {
     AddressEditController pageController = Get.put(AddressEditController());
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: Text('New Address'.tr,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
       body: GetBuilder<AddressEditController>(
         builder: (controller) => HandlingDataView(
           statusRequest: controller.statusRequest,

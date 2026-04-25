@@ -13,7 +13,7 @@ class OrderController extends GetxController {
   StatusRequest statusRequest = StatusRequest.loading;
   MyServices myServices = Get.find();
 
-  List<OrderModel> ordersPending = [];
+List<OrderModel> ordersPending = [];
   List<OrderModel> ordersArchive = [];
   String namePage = 'pending';
 

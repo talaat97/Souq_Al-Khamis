@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/localization/change_local.dart';
+import '../../core/services/notification/notification_helper.dart';
 
 class SettingsContoller extends GetxController {
   late String language;
@@ -20,7 +21,7 @@ class SettingsContoller extends GetxController {
       middleText: "logout_confirm".tr,
       onConfirm: () {
         myServices.sharedPreferences.setString('step', 'onboarding');
-       // NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
+        // NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
         Get.offAllNamed(AppRoute.login);
       },
       onCancel: () {},
@@ -41,9 +42,9 @@ class SettingsContoller extends GetxController {
 
   diableNotification() {
     if (notifactionSwitch) {
-    //  NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
+      NotificationsHelper.firebaseMessaging.unsubscribeFromTopic('users');
     } else {
-      //NotificationsHelper.firebaseMessaging.subscribeToTopic('users');
+      NotificationsHelper.firebaseMessaging.subscribeToTopic('users');
     }
     print(
         '////////////////////////////////////////////////////////////////////');
@@ -73,8 +74,8 @@ class SettingsContoller extends GetxController {
               Text(
                 "choose_language".tr,
                 style: Get.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 30),
               Row(

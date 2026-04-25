@@ -1,4 +1,5 @@
 import 'package:souq_al_khamis/core/constant/routs_page.dart';
+import 'package:souq_al_khamis/core/services/notification/notification_ui_service.dart';
 import 'package:souq_al_khamis/data/datasourse/remote/cart/cart_data.dart';
 import 'package:souq_al_khamis/data/model/cart_Model.dart';
 import 'package:flutter/widgets.dart';
@@ -34,13 +35,15 @@ class CartController extends GetxController {
 
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
-        Get.snackbar(
-          'Done',
-          'Item added to your cart',
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 2),
+        NotificationUIService.showBanner(
+          title: 'Done',
+          body: 'Item added to your cart',
         );
       } else {
+        NotificationUIService.showBanner(
+          title: 'Oops',
+          body: 'Item is already out of cart',
+        );
         statusRequest = StatusRequest.failure;
       }
       view();

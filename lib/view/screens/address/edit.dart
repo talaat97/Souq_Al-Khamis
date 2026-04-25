@@ -15,13 +15,6 @@ class AddressEdit extends StatelessWidget {
     EditAddressController pageController = Get.put(EditAddressController());
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: Text('Edit Address'.tr,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
       body: Column(
         children: [
           if (pageController.kGooglePlex != null)
@@ -54,9 +47,10 @@ class AddressEdit extends StatelessWidget {
                           Get.bottomSheet(
                             Container(
                               decoration: BoxDecoration(
-                                color: Theme.of(context).scaffoldBackgroundColor,
-                                borderRadius: const BorderRadius.vertical(top: Radius.circular(24))
-                              ),
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(24))),
                               child: Form(
                                 key: pageController.addreessKey,
                                 child: ListView(
@@ -66,10 +60,12 @@ class AddressEdit extends StatelessWidget {
                                       child: Container(
                                         width: 40,
                                         height: 4,
-                                        margin: const EdgeInsets.only(bottom: 20),
+                                        margin:
+                                            const EdgeInsets.only(bottom: 20),
                                         decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                       ),
                                     ),
@@ -79,7 +75,9 @@ class AddressEdit extends StatelessWidget {
                                         'Address Details'.tr,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                            .titleLarge
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     const SizedBox(height: 32),
@@ -89,8 +87,7 @@ class AddressEdit extends StatelessWidget {
                                         myController: pageController.name,
                                         myIcon: Icons.home_work_outlined,
                                         valid: (val) {
-                                          return checkVaild(
-                                              val!, 3, 100, '');
+                                          return checkVaild(val!, 3, 100, '');
                                         }),
                                     const SizedBox(height: 16),
                                     CustomTextField(
@@ -99,8 +96,7 @@ class AddressEdit extends StatelessWidget {
                                       myController: pageController.city,
                                       myIcon: Icons.location_city_outlined,
                                       valid: (val) {
-                                        return checkVaild(
-                                            val!, 3, 100, '');
+                                        return checkVaild(val!, 3, 100, '');
                                       },
                                     ),
                                     const SizedBox(height: 16),
@@ -110,8 +106,7 @@ class AddressEdit extends StatelessWidget {
                                       myController: pageController.street,
                                       myIcon: Icons.add_road_outlined,
                                       valid: (val) {
-                                        return checkVaild(
-                                            val!, 3, 100, '');
+                                        return checkVaild(val!, 3, 100, '');
                                       },
                                     ),
                                     const SizedBox(height: 32),

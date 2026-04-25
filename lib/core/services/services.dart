@@ -12,7 +12,9 @@ class MyServices extends GetxService {
 
 initialServices() async {
   var deviceToken = await NotificationsHelper.firebaseMessaging.getToken();
+  print("---------------------------------------");
   print(deviceToken);
+  print("---------------------------------------");
   NotificationsHelper().requestPermissionNotification();
   NotificationsHelper().configFCM();
   await Get.putAsync(() => MyServices().intIt());
