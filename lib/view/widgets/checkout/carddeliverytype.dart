@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:souq_al_khamis/core/constant/colors.dart';
 
 class CardDeliveryTypeCheckout extends StatelessWidget {
   final String imagename;
   final String title;
   final bool active;
   const CardDeliveryTypeCheckout(
-      {Key? key,
+      {super.key,
       required this.imagename,
       required this.title,
-      required this.active})
-      : super(key: key);
+      required this.active});
 
   @override
   Widget build(BuildContext context) {
@@ -18,33 +18,37 @@ class CardDeliveryTypeCheckout extends StatelessWidget {
       height: 120,
       width: 120,
       decoration: BoxDecoration(
-        color: active ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
+        color: active
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: active ? Theme.of(context).primaryColor : Colors.grey.shade300,
           width: 1.5,
         ),
-        boxShadow: active ? [
-          BoxShadow(
-            color: Theme.of(context).primaryColor.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          )
-        ] : null,
+        boxShadow: active
+            ? [
+                BoxShadow(
+                  color: Theme.of(context).primaryColor.withOpacity(0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                )
+              ]
+            : null,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             imagename,
-            width: 60,
-            color: active ? Colors.white : Theme.of(context).primaryColor,
+            width: 80,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text(
             title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: active ? Colors.white : Colors.black87,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: active ? AppColor.white : AppColor.black,
               fontWeight: FontWeight.bold,
             ),
           )

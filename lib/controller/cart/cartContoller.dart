@@ -62,22 +62,15 @@ class CartController extends GetxController {
 
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'failure') {
-        Get.snackbar(
-          'Oops',
-          'Item is already out of cart',
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 2),
-        );
-      }
-      if (response['status'] == 'success') {
-        Get.snackbar(
-          'Done',
-          'Item removed from your cart',
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 2),
+        NotificationUIService.showBanner(
+          title: 'Oops',
+          body: 'Item is already out of cart',
         );
       } else {
-        statusRequest = StatusRequest.failure;
+        NotificationUIService.showBanner(
+          title: 'Done',
+          body: 'Item removed from your cart',
+        );
       }
       view();
     }
@@ -93,10 +86,12 @@ class CartController extends GetxController {
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
         List responsedata = response['Cartdata'];
+        orderPrice =
+            double.parse(response['totalCartPriceAndCount']['totalCartPrice']);
+        numIteamsInCart = int.parse(
+            response['totalCartPriceAndCount']['totalCartIteamsCount']);
         cartIteams.addAll(responsedata.map((e) => CartModel.fromJson(e)));
-        orderPrice = double.parse(response['priceAndCoun']['totalPrice']);
-        numIteamsInCart = int.parse(response['priceAndCoun']['iteamsCount']);
-        totalPrice();
+        orderTotalPrice = totalPrice();
       } else {
         statusRequest = StatusRequest.failure;
       }
@@ -152,10 +147,9 @@ class CartController extends GetxController {
     }
   }
 
-  totalPrice() {
-    orderTotalPrice =
+  double totalPrice() {
+    return orderTotalPrice =
         (orderPrice - orderPrice * couponDiscount / 100) + shipping;
-    update();
   }
 
   @override

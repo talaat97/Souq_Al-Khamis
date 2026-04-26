@@ -4,13 +4,20 @@ import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:souq_al_khamis/core/services/notification/notification_ui_service.dart';
 
 class NotificationsHelper {
+  NotificationsHelper._();
+  static final NotificationsHelper instance = NotificationsHelper._();
+
   static final firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> initNotifications() async {
     await firebaseMessaging.requestPermission();
   }
 
-  requestPermissionNotification() async {
+  static Future<String> getFirebaseToken() async {
+    return await firebaseMessaging.getToken() ?? "";
+  }
+
+ static requestPermissionNotification() async {
     await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: false,
@@ -22,7 +29,7 @@ class NotificationsHelper {
     );
   }
 
-  configFCM() {
+ static configFCM() {
     FirebaseMessaging.onMessage.listen((message) {
       if (Get.key.currentContext != null) {
         FlutterRingtonePlayer().playNotification();

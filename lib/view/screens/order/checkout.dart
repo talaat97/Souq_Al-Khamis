@@ -1,8 +1,8 @@
 import 'package:souq_al_khamis/core/class/handling_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/order/check_out.dart';
+import '../../../core/constant/colors.dart';
 import '../../../core/constant/image_assets.dart';
 import '../../widgets/checkout/CardPaymentMethodCheckout.dart';
 import '../../widgets/checkout/CardShppingAddressCheckout.dart';
@@ -16,10 +16,13 @@ class Checkout extends StatelessWidget {
   Widget build(BuildContext context) {
     CheckoutContoller contoller = Get.put(CheckoutContoller());
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: AppColor.white,
       appBar: AppBar(
         title: Text('checkout_title'.tr,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -100,13 +103,17 @@ class Checkout extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                Icon(Icons.location_off_outlined, size: 60, color: Colors.grey.shade400),
+                                Icon(Icons.location_off_outlined,
+                                    size: 60, color: Colors.grey.shade400),
                                 const SizedBox(height: 16),
                                 Text(
                                   "no_address_found".tr,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Colors.grey.shade600,
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                        color: Colors.grey.shade600,
+                                      ),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(height: 16),
@@ -114,10 +121,12 @@ class Checkout extends StatelessWidget {
                                   onPressed: () {
                                     controller.goToAddress();
                                   },
-                                  icon: const Icon(Icons.add_location_alt_rounded),
+                                  icon: const Icon(
+                                      Icons.add_location_alt_rounded),
                                   label: Text("add_location".tr),
                                   style: TextButton.styleFrom(
-                                    foregroundColor: Theme.of(context).primaryColor,
+                                    foregroundColor:
+                                        Theme.of(context).primaryColor,
                                   ),
                                 ),
                               ],
@@ -149,16 +158,15 @@ class Checkout extends StatelessWidget {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 16,
-              offset: const Offset(0, -4),
-            ),
-          ]
-        ),
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 16,
+                offset: const Offset(0, -4),
+              ),
+            ]),
         child: AppButton(
           text: "checkout_button".tr,
           onPressed: () {
@@ -175,8 +183,8 @@ class Checkout extends StatelessWidget {
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-          fontWeight: FontWeight.bold,
-        ),
+              fontWeight: FontWeight.bold,
+            ),
       ),
     );
   }

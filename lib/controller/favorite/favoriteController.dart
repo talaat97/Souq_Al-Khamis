@@ -1,3 +1,4 @@
+import 'package:souq_al_khamis/core/services/notification/notification_ui_service.dart';
 import 'package:souq_al_khamis/core/services/services.dart';
 import 'package:get/get.dart';
 import '../../core/class/status_request.dart';
@@ -52,7 +53,8 @@ class FavoriteController extends GetxController {
 
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 'success') {
-        Get.rawSnackbar(title: 'Done', message: 'iteam add to favorite ');
+        NotificationUIService.showBanner(
+            title: 'Done', body: 'iteam add to favorite ');
       } else {
         statusRequest = StatusRequest.failure;
       }

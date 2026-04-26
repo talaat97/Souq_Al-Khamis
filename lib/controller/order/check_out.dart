@@ -18,7 +18,7 @@ class CheckoutContoller extends GetxController {
   late String couponId;
   late String couponDiscount;
   late String shipping;
-  late String deviseToken;
+  String? deviseToken;
   List<AddressModel> addresses = [];
   AddressData addressData = AddressData(Get.find());
   MyServices myServices = Get.find();
@@ -97,13 +97,13 @@ class CheckoutContoller extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     orderPrice = Get.arguments['orderPrice'].toString();
     couponId = Get.arguments['couponId'].toString();
     couponDiscount = Get.arguments['couponDiscount'].toString();
     shipping = Get.arguments['shipping'].toString();
     // Use the stored FCM token (fetched and stored during app initialization)
-    deviseToken = NotificationsHelper.firebaseMessaging.getToken().toString();
+    deviseToken = await NotificationsHelper.getFirebaseToken();
     getAddresses();
     super.onInit();
   }

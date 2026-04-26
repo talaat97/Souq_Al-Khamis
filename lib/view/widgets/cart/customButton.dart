@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../shared/app_button.dart';
 
-class CuttomButtonOfCart extends StatelessWidget {
+class CustomButtonPriceCheckout extends StatelessWidget {
   final double order;
   final double coupon;
   final double shipping;
@@ -12,7 +12,7 @@ class CuttomButtonOfCart extends StatelessWidget {
   final TextEditingController controllerCoupon;
   final void Function()? applyCoupon;
 
-  const CuttomButtonOfCart({
+  const CustomButtonPriceCheckout({
     super.key,
     required this.order,
     required this.shipping,
@@ -52,10 +52,12 @@ class CuttomButtonOfCart extends StatelessWidget {
                       controller: controllerCoupon,
                       decoration: InputDecoration(
                         hintText: 'Enter Coupon Code'.tr,
-                        hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade400, fontSize: 14),
                         filled: true,
                         fillColor: Colors.grey.shade100,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 0),
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(12),
@@ -70,16 +72,20 @@ class CuttomButtonOfCart extends StatelessWidget {
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white,
                       elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 14),
                     ),
-                    child: Text('Apply'.tr, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text('Apply'.tr,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ],
               )
             else
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -87,49 +93,52 @@ class CuttomButtonOfCart extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20),
+                    const Icon(Icons.check_circle_rounded,
+                        color: Colors.green, size: 20),
                     const SizedBox(width: 8),
                     Text(
                       'Code: ${controller.couponName} applied',
-                      style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          color: Colors.green, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Breakdown
             _buildPriceRow(context, 'Subtotal'.tr, '$order \$'),
             const SizedBox(height: 8),
-            _buildPriceRow(context, 'Discount'.tr, '-$coupon %', color: Colors.green),
+            _buildPriceRow(context, 'Discount'.tr, '$coupon %',
+                color: Colors.green),
             const SizedBox(height: 8),
             _buildPriceRow(context, 'Shipping'.tr, '$shipping \$'),
-            
+
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Divider(height: 1),
             ),
-            
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Total'.tr,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 Text(
                   '$totlaPrice \$',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 24),
             AppButton(
               text: 'Checkout'.tr,
@@ -141,22 +150,23 @@ class CuttomButtonOfCart extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceRow(BuildContext context, String label, String value, {Color? color}) {
+  Widget _buildPriceRow(BuildContext context, String label, String value,
+      {Color? color}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           label,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Colors.grey.shade600,
-          ),
+                color: Colors.grey.shade600,
+              ),
         ),
         Text(
           value,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: color ?? Theme.of(context).textTheme.bodyLarge?.color,
-          ),
+                fontWeight: FontWeight.bold,
+                color: color ?? Theme.of(context).textTheme.bodyLarge?.color,
+              ),
         ),
       ],
     );
