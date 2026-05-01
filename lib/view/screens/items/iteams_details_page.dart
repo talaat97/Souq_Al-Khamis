@@ -1,4 +1,5 @@
 import 'package:souq_al_khamis/core/function/translate_database.dart';
+import 'package:souq_al_khamis/core/services/notification/notification_ui_service.dart';
 import 'package:souq_al_khamis/view/widgets/itemsDetails/priceAndCount.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,10 +61,9 @@ class ItemsDetailsPage extends StatelessWidget {
                             itemsDetailController.iteamsModel.iteamsId!);
                         itemsDetailController.update();
                       } else {
-                        Get.rawSnackbar(
+                        NotificationUIService.showBanner(
                             title: 'Oops!',
-                            message: 'This item count is already zero',
-                            duration: const Duration(seconds: 2));
+                            body: 'This item count is already zero');
                       }
                     },
                   ),

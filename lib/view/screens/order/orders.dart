@@ -20,8 +20,10 @@ class OrdersPage extends StatelessWidget {
         builder: (controller) => HandlingDataView(
           statusRequest: controller.statusRequest,
           widget: controller.namePage == 'pending'
-              ? _buildOrderList(
-                  context,
+              ? OrderListWidget(
+                  refreshOrders: () async {
+                    return await controller.refreshPendingOrders();
+                  },
                   isEmpty: controller.ordersPending.isEmpty,
                   emptyIcon: Icons.pending_actions_outlined,
                   emptyMessage: 'no_pending_orders'.tr,
@@ -30,8 +32,10 @@ class OrdersPage extends StatelessWidget {
                     orderModel: controller.ordersPending[index],
                   ),
                 )
-              : _buildOrderList(
-                  context,
+              : OrderListWidget(
+                  refreshOrders: () async{
+                    return await controller.refreshArchiveOrders();
+                  },
                   isEmpty: controller.ordersArchive.isEmpty,
                   emptyIcon: Icons.archive_outlined,
                   emptyMessage: 'no_archive_orders'.tr,
@@ -44,21 +48,37 @@ class OrdersPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildOrderList(
-    BuildContext context, {
-    required bool isEmpty,
-    required IconData emptyIcon,
-    required String emptyMessage,
-    required int itemCount,
-    required Widget Function(int index) itemBuilder,
-  }) {
+class OrderListWidget extends GetView<OrderController> {
+  final bool isEmpty;
+  final IconData emptyIcon;
+  final String emptyMessage;
+  final int itemCount;
+  final Widget Function(int index) itemBuilder;
+  final Future<void> Function() refreshOrders;
+
+  const OrderListWidget({
+    super.key,
+    required this.isEmpty,
+    required this.emptyIcon,
+    required this.emptyMessage,
+    required this.itemCount,
+    required this.itemBuilder,
+    required this.refreshOrders,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     if (isEmpty) {
-      return _buildEmptyState(context, emptyIcon, emptyMessage);
+      return EmptyStateWidget(
+        icon: emptyIcon,
+        message: emptyMessage,
+      );
     }
 
     return RefreshIndicator(
-      onRefresh: () async => Get.find<OrderController>().refreshOrders(),
+      onRefresh: refreshOrders,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         itemCount: itemCount,
@@ -66,12 +86,20 @@ class OrdersPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildEmptyState(
-    BuildContext context,
-    IconData icon,
-    String message,
-  ) {
+class EmptyStateWidget extends StatelessWidget {
+  final IconData icon;
+  final String message;
+
+  const EmptyStateWidget({
+    super.key,
+    required this.icon,
+    required this.message,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +126,7 @@ class OrdersPage extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           OutlinedButton.icon(
-            onPressed: () => Get.find<OrderController>().refreshOrders(),
+            onPressed: () => Get.find<OrderController>().refreshPendingOrders(),
             icon: const Icon(Icons.refresh),
             label: Text('refresh'.tr),
           ),

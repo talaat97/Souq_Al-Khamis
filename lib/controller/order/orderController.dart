@@ -13,7 +13,7 @@ class OrderController extends GetxController {
   StatusRequest statusRequest = StatusRequest.loading;
   MyServices myServices = Get.find();
 
-List<OrderModel> ordersPending = [];
+  List<OrderModel> ordersPending = [];
   List<OrderModel> ordersArchive = [];
   String namePage = 'pending';
 
@@ -56,7 +56,7 @@ List<OrderModel> ordersPending = [];
   }
 
   // ─── API Calls ────────────────────────────────────────────
-  Future<void> getPendingOrders() async {
+  getPendingOrders() async {
     ordersPending.clear();
     statusRequest = StatusRequest.loading;
     update();
@@ -70,14 +70,18 @@ List<OrderModel> ordersPending = [];
       if (response['status'] == 'success') {
         List responseData = response['data'];
         ordersPending.addAll(responseData.map((e) => OrderModel.fromJson(e)));
-      } else {
+        statusRequest = StatusRequest.success;
+      }
+      if (response['status'] == 'failure') {
         statusRequest = StatusRequest.failure;
       }
+    } else {
+      statusRequest = StatusRequest.serverfailure;
     }
     update();
   }
 
-  Future<void> getArchiveOrders() async {
+  getArchiveOrders() async {
     ordersArchive.clear();
     statusRequest = StatusRequest.loading;
     update();
@@ -91,16 +95,23 @@ List<OrderModel> ordersPending = [];
       if (response['status'] == 'success') {
         List responseData = response['data'];
         ordersArchive.addAll(responseData.map((e) => OrderModel.fromJson(e)));
-      } else {
+           statusRequest = StatusRequest.success;
+      }
+      if (response['status'] == 'failure') {
         statusRequest = StatusRequest.failure;
       }
+    } else {
+      statusRequest = StatusRequest.serverfailure;
     }
     update();
   }
 
-  Future<void> refreshOrders() async {
-    await getPendingOrders();
-    await getArchiveOrders();
+  Future<void> refreshPendingOrders() async {
+    getPendingOrders();
+  }
+
+  Future<void> refreshArchiveOrders() async {
+    getArchiveOrders();
   }
 
   Future<void> deleteOrder(OrderModel orderModel) async {
